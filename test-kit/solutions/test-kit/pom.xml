@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
-	<artifactId>processing-orders</artifactId>
+	<artifactId>test-kit</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>processing-orders</name>
-	<description>GE: Processing Orders with the File Component</description>
+	<name>test-kit</name>
+	<description>GE: Testing Routes with Camel Test Kit</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -25,11 +25,11 @@
 		</dependencies>
 	  </dependencyManagement>
 	<dependencies>
-		<!-- TODO add camel dependency -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
+		 <!-- TODO Add camel test dependencies here -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -58,6 +58,10 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+				  <source>1.8</source>
+				  <target>1.8</target>
+				</configuration>
 			  </plugin>
 			  <plugin>
 				<groupId>org.jboss.redhat-fuse</groupId>
