@@ -3,6 +3,18 @@
 
 ## Health Gateway Application
 
+## Data sources
+
+https://data.europa.eu/data/datasets/data-by-country?locale=en
+
+https://data.europa.eu/data/datasets/covid-19-vaccine-tracker?locale=en
+
+## Rough Architecture
+
+
+
+## Running the Demo
+
 To run the SFTP server, navigate to the `resources/data` directory and run the following python script in a python venv:
 
 [source,sh]
