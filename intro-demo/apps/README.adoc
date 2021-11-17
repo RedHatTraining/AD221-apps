@@ -20,7 +20,7 @@ To run the SFTP server, navigate to the `resources/data` directory and run the f
 
 The `-k` property in the command should be a private ssh key that you must provide.
 
-To build run the gateway application go into the `health-gateway` directory and run the following command:app-name: 
+To build and run the gateway application go into the `health-gateway` directory and run the following command:app-name: 
 
 
 [source,sh]
