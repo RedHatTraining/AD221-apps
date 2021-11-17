@@ -1,0 +1,38 @@
+# Demo Application
+
+
+## Health Gateway Application
+
+To run the SFTP server, navigate to the `resources/data` directory and run the following python script in a python venv:
+
+[source,sh]
+----
+(.venv) [user@host data]$ python ../../scripts/sftp_server.py -k ~/.ssh/id_rsa
+----
+
+The `-k` property in the command should be a private ssh key that you must provide.
+
+To build run the gateway application go into the `health-gateway` directory and run the following command:app-name: 
+
+
+[source,sh]
+----
+(.venv) [user@host data]$ ./mvnw clean package spring-boot:run
+----
+
+Validate the REST APIs are working.
+
+Covic-19 cases overall data for European countries:
+
+[source,sh]
+----
+(.venv) [user@host data]$ curl -kv http://localhost:8080/camel/cases
+----
+
+Covic-19 weekly vaccination data for European countries:
+
+[source,sh]
+----
+(.venv) [user@host data]$ curl -kv http://localhost:8080/camel/vaccinations
+----
+
