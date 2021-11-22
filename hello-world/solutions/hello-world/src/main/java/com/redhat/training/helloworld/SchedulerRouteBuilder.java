@@ -12,8 +12,9 @@ public class SchedulerRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
 
 	from("scheduler:myScheduler?delay=2000")
-		.setBody().simple("Current time is ${header.CamelTimerFiredTime}") 
-		.log("Hello World.  Body: ${body}")
-		.to("mock:end");
+	    .routeId("Java DSL route")
+	    .setBody().simple("Current time is ${header.CamelTimerFiredTime}") 
+            .log("Sending message to the body logging route")
+            .to("direct:log_body");
     }
 }
