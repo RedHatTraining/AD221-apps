@@ -2,21 +2,23 @@ package com.redhat.training.health.model;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@XmlRootElement(name = "record")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class CovidVaccination implements Serializable {
+@Entity
+@Table(name = "covid_vaccinations")
+public class CovidVaccinationEntity implements Serializable {
 
     private static final long serialVersionUID = -1L;
 
-    @XmlElement(name = "Region")
+    @Id
+    @GeneratedValue
+    private int id;
+
     private String region;
 
-    @XmlElement(name = "FirstDose")
     private Integer firstDose;
 
 

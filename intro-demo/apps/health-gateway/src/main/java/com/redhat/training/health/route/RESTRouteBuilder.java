@@ -1,12 +1,11 @@
 package com.redhat.training.health.route;
 
 
-import org.springframework.stereotype.Component;
-
 import com.redhat.training.health.service.CovidService;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
+import org.springframework.stereotype.Component;
 
 @Component
 public class RESTRouteBuilder extends RouteBuilder {
@@ -15,8 +14,8 @@ public class RESTRouteBuilder extends RouteBuilder {
 	public void configure() throws Exception {
 
 		restConfiguration()
-                .component("servlet")
-                .bindingMode(RestBindingMode.json);
+			.component("servlet")
+			.bindingMode(RestBindingMode.json);
 
 		rest("/cases")
 			.get("/")

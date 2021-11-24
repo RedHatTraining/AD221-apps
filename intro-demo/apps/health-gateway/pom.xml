@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
-	<artifactId>processing-orders</artifactId>
+	<artifactId>health-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>health-gateway</name>
 	<description>Demo: A Gateway for Covid-19 health data</description>
@@ -60,6 +60,22 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jpa-starter</artifactId>
 		 </dependency>
+		 <dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-kafka-starter</artifactId>
+		 </dependency>
+		 <!--dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>artemis-jms-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+		  </dependency>
+		 <dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms-starter</artifactId>
+		 </dependency-->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-servlet-starter</artifactId>
@@ -100,8 +116,8 @@
             <version>4.5.13</version>
         </dependency>
 		<dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
 		<dependency>

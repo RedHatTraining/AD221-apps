@@ -1,7 +1,7 @@
 package com.redhat.training.health.service;
 
 import com.redhat.training.health.model.CovidCase;
-import com.redhat.training.health.model.CovidVaccination;
+import com.redhat.training.health.model.CovidVaccinationEntity;
 import com.redhat.training.health.repository.CovidCaseRepository;
 import com.redhat.training.health.repository.CovidVaccinationRepository;
 
@@ -21,7 +21,7 @@ public class CovidService {
         return covidCaseRepository.findAll();
     }
 
-    public Iterable<CovidVaccination> getAllCovidVaccinations() {
+    public Iterable<CovidVaccinationEntity> getAllCovidVaccinations() {
         return covidVaccinationRepository.findAll();
     }
     
