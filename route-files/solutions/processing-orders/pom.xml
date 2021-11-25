@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
 	<artifactId>processing-orders</artifactId>
@@ -12,18 +11,19 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<fuse.version>7.9.0.fuse-sb2-790065-redhat-00001</fuse.version>
+		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
-		  <dependency>
-			<groupId>org.jboss.redhat-fuse</groupId>
-			<artifactId>fuse-springboot-bom</artifactId>
-			<version>${fuse.version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		  </dependency>
+			<dependency>
+				<groupId>org.jboss.redhat-fuse</groupId>
+				<artifactId>fuse-springboot-bom</artifactId>
+				<version>${fuse.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
-	  </dependencyManagement>
+	</dependencyManagement>
 	<dependencies>
 		<!-- TODO add camel dependency -->
 		<dependency>
@@ -40,37 +40,50 @@
 			<artifactId>camel-test-spring</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-ftp</artifactId>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
-		  <id>red-hat-ga-repository</id>
-		  <url>https://maven.repository.redhat.com/ga</url>
+			<id>red-hat-ga-repository</id>
+			<url>https://maven.repository.redhat.com/ga</url>
 		</repository>
-	  </repositories>
-	  <pluginRepositories>
+	</repositories>
+	<pluginRepositories>
 		<pluginRepository>
-		  <id>red-hat-ga-repository</id>
-		  <url>https://maven.repository.redhat.com/ga</url>
+			<id>red-hat-ga-repository</id>
+			<url>https://maven.repository.redhat.com/ga</url>
 		</pluginRepository>
-	  </pluginRepositories>
+	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire-plugin.version}</version>
+			</plugin>
+			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
-			  </plugin>
-			  <plugin>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.jboss.redhat-fuse</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${fuse.version}</version>
 				<executions>
-				  <execution>
-					<goals>
-					  <goal>repackage</goal>
-					</goals>
-				  </execution>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
 				</executions>
-			  </plugin>
+			</plugin>
 		</plugins>
 	</build>
 

@@ -11,7 +11,11 @@ public class FileRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from("file:orders/incoming?include=order.*xml")
-                .to("file:orders/outgoing/?fileExist=Fail");
+        from("ftp://localhost:8021/?"
+            + "username=datauser&password=fuse&"
+            + "passiveMode=true&include=.*txt")
+            // .to("log:output")
+        // from("file:orders/incoming?include=order.*xml")
+                .to("file:tickets/");
     }
 }
