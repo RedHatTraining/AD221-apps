@@ -1,9 +1,5 @@
 FROM registry.fedoraproject.org/fedora-minimal:34
 
-
-ENV USERNAME=datauser \
-    PASSWORD=fuse
-
 RUN microdnf install -y vsftpd && \
     microdnf clean all
 
@@ -11,6 +7,9 @@ COPY vsftpd.conf /etc/vsftpd/
 COPY start_ftp_server.sh /bin/start_ftp_server.sh
 
 RUN chmod +x /bin/start_ftp_server.sh
+
+ENV USERNAME=datauser \
+    PASSWORD=fuse
 
 VOLUME /home/${USERNAME}
 

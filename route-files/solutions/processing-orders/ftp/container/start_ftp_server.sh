@@ -5,6 +5,6 @@ echo "${USERNAME}:${PASSWORD}" | chpasswd
 chown ${USERNAME}:${USERNAME} /home/${USERNAME}
 chmod 777 -R /home/${USERNAME}/*
 
-echo "Running FTP server..."
+echo "FTP server running..."
 
 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
