@@ -1,11 +1,9 @@
 #!/bin/sh
 useradd -M -d /home/${USERNAME} -u 1001 $USERNAME
-
-chown ${USERNAME}:${USERNAME} /home/${USERNAME}
-
 echo "${USERNAME}:${PASSWORD}" | chpasswd
 
-# /usr/bin/ln -sf /dev/stdout /var/log/xferlog
+chown ${USERNAME}:${USERNAME} /home/${USERNAME}
+chmod 777 -R /home/${USERNAME}/*
 
 echo "Running FTP server..."
 
