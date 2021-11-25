@@ -13,7 +13,7 @@ public class FileRouteBuilder extends RouteBuilder {
         from(
             "ftp://localhost:21721/?" +
             "username=datauser&password=fuse&" +
-            "include=.*txt&" +
+            "include=ticket.*txt&" +
             "passiveMode=true"
         )
         .to("file:customer_requests/");
