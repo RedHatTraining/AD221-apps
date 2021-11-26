@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 // TODO: Enable the route by extending the RouteBuilder superclass
 @Component
-public class FileRouteBuilder extends RouteBuilder {
+public class FtpToFileRouteBuilder extends RouteBuilder {
 
     // TODO: Implement the configure method
     @Override
