@@ -16,6 +16,7 @@ public class FileRouteBuilder extends RouteBuilder {
             "include=ticket.*txt&" +
             "passiveMode=true"
         )
+        .routeId("ftpRoute")
         .to("file:customer_requests/");
     }
 }
