@@ -17,6 +17,7 @@ public class FtpToFileRouteBuilder extends RouteBuilder {
             "passiveMode=true"
         )
         .routeId("ftpRoute")
+        .log("File: ${header.CamelFileName}")
         .to("file:customer_requests/");
     }
 }

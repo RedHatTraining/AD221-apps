@@ -25,7 +25,11 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
-		<!-- TODO add camel dependency -->
+		<!-- TODO add FTP camel component dependency -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-ftp</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
@@ -39,10 +43,6 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-test-spring</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-ftp</artifactId>
 		</dependency>
 	</dependencies>
 	<repositories>
