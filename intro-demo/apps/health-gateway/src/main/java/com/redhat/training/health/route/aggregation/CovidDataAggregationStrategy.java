@@ -6,9 +6,7 @@ import com.redhat.training.health.model.CovidVaccination;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
-import org.springframework.stereotype.Component;
 
-@Component
 public class CovidDataAggregationStrategy implements AggregationStrategy{
 
 	@Override
@@ -17,14 +15,18 @@ public class CovidDataAggregationStrategy implements AggregationStrategy{
         CovidVaccination covidVaccination = resource.getIn().getBody(CovidVaccination.class);
         CovidData covidData = new CovidData();
 
-
-        if(covidCase.getNuts().equals(covidVaccination.getRegion())){
+            if(covidCase.getNuts().equals(covidVaccination.getRegion()) &&
+                covidCase.getYearWeekISO().equals(covidVaccination.getYearWeekISO())
+            ){
             covidData.setCountryCode(covidVaccination.getRegion());
             covidData.setCountryName(covidCase.getCountryName());
             covidData.setCumulativePositive(covidCase.getCumulativePositive());
             covidData.setCumulativeDeceased(covidCase.getCumulativeDeceased());
             covidData.setCumulativeRecovered(covidCase.getCumulativeRecovered());
             covidData.setFirstDose(covidVaccination.getFirstDose());
+            covidData.setFirstDose(covidVaccination.getSecondDose());
+            covidData.setYearWeekISO(covidVaccination.getYearWeekISO());
+            covidData.setVaccine(covidVaccination.getVaccine());
         }
 
         original.getIn().setBody(covidData);

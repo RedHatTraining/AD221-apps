@@ -1,12 +1,11 @@
 package com.redhat.training.health.repository;
 
-import javax.transaction.Transactional;
 
-import com.redhat.training.health.model.CovidVaccinationEntity;
+import com.redhat.training.health.model.CovidVaccination;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CovidVaccinationRepository extends CrudRepository<CovidVaccinationEntity, Integer> {
+public interface CovidVaccinationRepository extends CrudRepository<CovidVaccination, Integer> {
 }

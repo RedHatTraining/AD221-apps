@@ -1,29 +1,30 @@
 package com.redhat.training.health.route;
 
 import java.net.URI;
+import java.util.concurrent.ExecutorService;
 
 import javax.xml.bind.JAXBContext;
 
 import com.redhat.training.health.model.CovidCase;
 import com.redhat.training.health.model.CovidData;
-import com.redhat.training.health.model.CovidVaccination;
-import com.redhat.training.health.model.CovidVaccinationEntity;
+import com.redhat.training.health.model.CovidVaccinations;
 import com.redhat.training.health.route.aggregation.CovidDataAggregationStrategy;
+import com.redhat.training.health.route.filter.CovidCaseFilter;
+import com.redhat.training.health.route.splitter.CovidVaccinationXMLSplitter;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.builder.ThreadPoolBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
+import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.model.dataformat.BindyType;
 import org.apache.http.client.utils.URIBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CovidDataRouteBuilder extends RouteBuilder {
-
-    @Autowired
-	private CovidDataAggregationStrategy covidDataAggregationStrategy;
 
     @Value("${sftp.username}")
     private String sftpUsername;
@@ -33,6 +34,15 @@ public class CovidDataRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+
+        CamelContext context = new DefaultCamelContext();
+
+        ThreadPoolBuilder builder = new ThreadPoolBuilder(context);
+        ExecutorService executorService = builder.poolSize(500)
+                                            .maxPoolSize(1000)
+                                            .maxQueueSize(-1)
+                                            .build("customExecutorService");
+
         URI casesDataURL = new URIBuilder()
             .setScheme("sftp")
             .setHost("127.0.0.1")
@@ -59,32 +69,39 @@ public class CovidDataRouteBuilder extends RouteBuilder {
             .transform(body())
             .unmarshal()
             .bindy(BindyType.Csv, CovidCase.class)
-            .split(body())
-            .streaming()
-            .wireTap("direct:cases-to-kafka")
-            .to("jpa:com.redhat.training.health.model.CovidCase");
+            .split(body()).streaming()
+            .parallelProcessing()
+            .filter().method(CovidCaseFilter.class, "isLastDayOfWeek")
+            .wireTap("direct:cases-to-enrich")
+            .to("seda:covid-cases");
 
         JaxbDataFormat xmlDataFormat = new JaxbDataFormat();
-		JAXBContext jaxbContext = JAXBContext.newInstance(CovidVaccination.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(CovidVaccinations.class);
 		xmlDataFormat.setContext(jaxbContext);
 
-        from(vaccinationDataURL.toString())
-            .split().tokenizeXML("record")
-            .streaming()
-            .unmarshal(xmlDataFormat)
-            .wireTap("direct:vaccinations-to-kafka")
-            .convertBodyTo(CovidVaccinationEntity.class)
-            .to("jpa:com.redhat.training.health.model.CovidVaccinationEntity");
 
-        from("direct:cases-to-kafka")
-            .pollEnrich("direct:vaccinations-to-kafka", covidDataAggregationStrategy)
+        from(vaccinationDataURL.toString())
+            .unmarshal(xmlDataFormat)
+            .split(method(new CovidVaccinationXMLSplitter(), "split")).streaming()
+            .executorService(executorService)
+            .split(body()).streaming()
+            .executorService(executorService)
+            .wireTap("direct:vaccinations-to-enrich")
+            .to("seda:covid-vaccinations");
+
+        from("direct:cases-to-enrich")
+            .pollEnrich("direct:vaccinations-to-enrich", new CovidDataAggregationStrategy())
             .choice()
-                .when().simple("${body.countryName} != null")
-                .marshal(new JacksonDataFormat(CovidData.class))
-                .to("kafka:covid-data")
+                .when().simple("${body.countryCode} != null")
+                    .marshal(new JacksonDataFormat(CovidData.class))
+                    .log("${body}")
+                    .to("kafka:covid-data")
             .end();
 
-        from("direct:logger")
-            .log("${body}");
+        from("seda:covid-cases")
+            .to("jpa:com.redhat.training.health.model.CovidCase");
+
+        from("seda:covid-vaccinations")
+            .to("jpa:com.redhat.training.health.model.CovidVaccination");
     } 
 }

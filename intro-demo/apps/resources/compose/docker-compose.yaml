@@ -25,7 +25,7 @@ services:
     - "9092:9092"
     environment:
       LOG_DIR: "/tmp/logs"
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.1.38:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
@@ -44,3 +44,8 @@ services:
       MYSQL_DATABASE: coviddb
       MYSQL_USER: dbuser
       MYSQL_PASSWORD: dbpass
+
+  restcountries:
+    image: localhost/restcountries:latest
+    ports:
+      - 9090:8080

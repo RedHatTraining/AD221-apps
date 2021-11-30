@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
 import org.apache.camel.dataformat.bindy.annotation.DataField;
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
 
 @Entity
 @Table(name = "covid_cases")
@@ -25,7 +27,7 @@ public class CovidCase implements Serializable {
     private int id;
    
     @DataField(pos=1, pattern="yyyy-MM-dd")
-	private Date date = new Date();
+	private Date date;
 
     @DataField(pos=3)
     private String countryName;
@@ -101,6 +103,10 @@ public class CovidCase implements Serializable {
 
     public void setNuts(String nuts) {
         this.nuts = nuts;
+    }
+
+    public String getYearWeekISO() {
+		return ISODateTimeFormat.weekyearWeek().print(new DateTime(this.date));
     }
 
 }

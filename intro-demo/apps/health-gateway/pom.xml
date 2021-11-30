@@ -64,18 +64,6 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-kafka-starter</artifactId>
 		 </dependency>
-		 <!--dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>artemis-jms-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.json</groupId>
-			<artifactId>javax.json-api</artifactId>
-		  </dependency>
-		 <dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms-starter</artifactId>
-		 </dependency-->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-servlet-starter</artifactId>
@@ -121,6 +109,11 @@
             <scope>runtime</scope>
         </dependency>
 		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.10.13</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-test-spring</artifactId>
 			<scope>test</scope>
@@ -143,6 +136,10 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				  </configuration>
 			  </plugin>
 			  <plugin>
 				<groupId>org.jboss.redhat-fuse</groupId>

@@ -12,6 +12,9 @@ public class CovidData implements Serializable {
     private Integer cumulativeDeceased;
     private Integer cumulativeRecovered;
     private Integer firstDose;
+	private Integer secondDose;
+	private String yearWeekISO;
+	private String vaccine;
     
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -52,7 +55,25 @@ public class CovidData implements Serializable {
 	public void setFirstDose(Integer firstDose) {
 		this.firstDose = firstDose;
 	}
-
+	public Integer getSecondDose() {
+		return secondDose;
+	}
+	public void setSecondDose(Integer secondDose) {
+		this.secondDose = secondDose;
+	}
+	public String getYearWeekISO() {
+		return yearWeekISO;
+	}
+	public void setYearWeekISO(String yearWeekISO) {
+		this.yearWeekISO = yearWeekISO;
+	}
+	public String getVaccine() {
+		return vaccine;
+	}
+	public void setVaccine(String vaccine) {
+		this.vaccine = vaccine;
+	}
+	
     
     
 }
