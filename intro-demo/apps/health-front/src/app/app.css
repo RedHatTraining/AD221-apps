@@ -6,16 +6,9 @@ html, body, #root {
   width: 8em;
 }
 
-.turbineGraphic {
-  margin: 2em 1em ;
-  text-align: center;
+.flag {
+  height: 16px;
 }
-
-.turbineGraphicBlades {
-  animation: spin 1s linear infinite;
-  transform-origin: 140px 157px;
-}
-
 
 @keyframes spin {
   0% {

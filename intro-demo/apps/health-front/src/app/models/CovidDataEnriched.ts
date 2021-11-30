@@ -8,4 +8,5 @@ export interface CovidDataEnriched {
     secondDose: number;
     yearWeekISO: string;
     vaccine: string;
+    flagImageURL: string;
 }
