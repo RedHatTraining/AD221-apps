@@ -9,4 +9,5 @@ export interface CovidDataEnriched {
     yearWeekISO: string;
     vaccine: string;
     flagImageURL: string;
+    population: number;
 }

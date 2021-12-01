@@ -19,3 +19,14 @@ html, body, #root {
       transform: rotate(360deg);
   }
 }
+
+
+.pf-c-badge.pf-m-unread.vacc-dose {
+  --pf-c-badge--Color: var(--pf-c-badge--m-unread--Color);
+  --pf-c-badge--BackgroundColor: green;
+}
+
+.pf-c-badge.pf-m-unread.case-dec {
+  --pf-c-badge--Color: var(--pf-c-badge--m-unread--Color);
+  --pf-c-badge--BackgroundColor: black;
+}

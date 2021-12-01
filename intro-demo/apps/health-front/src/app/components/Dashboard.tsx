@@ -8,12 +8,12 @@ import { CovidDataEnriched } from '../models/CovidDataEnriched';
 const Dashboard = ():JSX.Element => {
     const [covidDatas, setCovidData] = useState<CovidDataEnriched[]>([]);
 
-
+    
     useEffect(() => {
-        getCovidDataEnriched()
+        setInterval(() => getCovidDataEnriched()
             .then((covidDatas) => {
                 setCovidData(covidDatas);
-            });
+        }), 3000);
     }, []);
 
     const covidDataWeekMap = new Map();
@@ -29,7 +29,17 @@ const Dashboard = ():JSX.Element => {
         covidDataWeekMap.set(covidData.yearWeekISO, covidDataArr)
 	};
 
-    covidDatas.map(covidData => addCovidDataToMap(covidData));
+    covidDatas.sort((covidData1,covidData2) => {
+        if (covidData1.yearWeekISO > covidData2.yearWeekISO) {
+            return 1;
+        }
+    
+        if (covidData1.yearWeekISO < covidData2.yearWeekISO) {
+            return -1;
+        }
+    
+        return 0;
+    }).map(covidData => addCovidDataToMap(covidData));
 
     const elems: ReactElement[] = []
     covidDataWeekMap.forEach((value: CovidDataEnriched[], key: string) => elems.push(<GridItem key={key}>
@@ -41,7 +51,7 @@ const Dashboard = ():JSX.Element => {
 
     return (
         <PageSection>
-            <Title headingLevel="h1" size="lg">Weekly Covid Data of European Countries</Title>
+            <Title headingLevel="h1" size="lg">Covid Data of European Countries by Week Year</Title>
             <Grid hasGutter>
                 {elems}
             </Grid>

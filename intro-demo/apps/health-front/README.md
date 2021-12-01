@@ -1,14 +1,6 @@
-# Wind Turbines Dashboard
+# Covid Data Dashboard
 
-This is a simple React frontend app to show wind turbines data.
-
-Because students might not have Node.js installed, we need to provide them with the _built_ web application.
-
-Run `npm run build` before pushing changes.
-This will generate the `dist` folder.
-This folder is included in the repository.
-
-Students can therefore serve the application by just running `python scripts/serve-frontend.py`.
+This is a simple React frontend app to show covid data by countries.
 
 ## Development scripts
 ```sh

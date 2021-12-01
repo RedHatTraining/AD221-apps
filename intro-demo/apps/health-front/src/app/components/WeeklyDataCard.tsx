@@ -6,7 +6,8 @@ import {
 	CardBody,
 	CardExpandableContent,
 	Level,
-	GridItem
+	GridItem,
+  Grid
 } from '@patternfly/react-core';
 import { CovidDataEnriched } from '../models/CovidDataEnriched';
 import { CovidDataCard } from './CovidDataCard';
@@ -19,66 +20,51 @@ interface CovidDataProps {
 
 interface CardState {
 	isCardExpanded: boolean;
-	isDropdownOpen: boolean;
 }
 
 const WeeklyDataCard = (props: CovidDataProps): JSX.Element => {
 
     const [state, setState] = useState<CardState>({
-		isCardExpanded: false,
-		isDropdownOpen: false
+		isCardExpanded: true
 	});
 
 	const onCardExpand = () => {
 		setState({
-			isCardExpanded: !state.isCardExpanded,
-			isDropdownOpen: false
-		});
+			isCardExpanded: !state.isCardExpanded
+      });
     };
-  
-	const onActionToggle = () => {
-		setState({
-			isCardExpanded: !state.isCardExpanded,
-			isDropdownOpen: !state.isDropdownOpen
-		});
-	};
-
-	const onActionSelect = () => {
-		setState({
-			isCardExpanded: false,
-			isDropdownOpen: !state.isDropdownOpen
-		});
-	};
 
 	return (
-		<Card id="horizontal card" isExpanded={state.isCardExpanded}>
+		<Card id="weeklyDataCard" isExpanded={state.isCardExpanded}>
         <CardHeader
           onExpand={onCardExpand}
           toggleButtonProps={{
-            id: 'toggle-button',
+            id: 'toggleButton',
             'aria-label': 'Actions',
-            'aria-labelledby': 'titleId toggle-button',
+            'aria-labelledby': 'cardTitle toggleButton',
             'aria-expanded': state.isCardExpanded
           }}
         >
-          {state.isCardExpanded && <CardTitle id="titleId">{props.yearWeek}</CardTitle>}
+          {state.isCardExpanded && <CardTitle id="cardTitle">{props.yearWeek}</CardTitle>}
           {!state.isCardExpanded && (
             <Level hasGutter>
-              <CardTitle id="titleId">{props.yearWeek}</CardTitle>
+              <CardTitle id="cardTitle">{props.yearWeek}</CardTitle>
             </Level>
           )}
         </CardHeader>
         <CardExpandableContent>
           <CardBody>
+          <Grid hasGutter>
             {
               props.covidDatas.map(covidData =>
-                <GridItem key={covidData.countryCode + "-" + covidData.yearWeekISO}>
-                    <CovidDataCard
+                <GridItem key={covidData.countryCode + "-" + covidData.yearWeekISO + "-" + covidData.vaccine}>
+                    <CovidDataCard 
                         covidData={covidData}
                     ></CovidDataCard>
                 </GridItem>
             )
             }
+            </Grid>
           </CardBody>
         </CardExpandableContent>
       </Card>

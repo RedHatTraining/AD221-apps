@@ -44,10 +44,10 @@ public class CovidCountryJsonDataAggregationStrategy implements AggregationStrat
                 IntStream.range(0, covidDataRootNode.size()).forEach(covidIndex -> {
                     JsonNode covidDataNode = covidDataRootNode.get(covidIndex);
                     if (covidDataNode.get(COUNTRY_NAME).asText()
-                            .equals(countriesDataNode.get(NAME).get(COMMON).asText())) {
+                            .equals(countriesDataNode.get(NAME).get(COMMON).asText())){
                         ((ObjectNode) covidDataNode).set(FLAG_IMAGE_URL, flagImageURLNode);
                         ((ObjectNode) covidDataNode).set(POPULATION, populationNode);
-                    }
+                            }
                 });
             });
 

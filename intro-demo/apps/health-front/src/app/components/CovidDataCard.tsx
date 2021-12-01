@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardBody,
-	CardExpandableContent,
-	Level,
-	Label,
-	Grid,
-	Flex,
-	List,
-	ListItem,
-	Button
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardExpandableContent,
+  Level,
+  Grid,
+  Text,
+  Badge,
+  GridItem,
 } from '@patternfly/react-core';
+import {Caption, TableComposable, Tbody, Td, Th, Thead, Tr} from '@patternfly/react-table';
 import { CovidDataEnriched } from '../models/CovidDataEnriched';
-import InfoCircleIcon from '@patternfly/react-icons/dist/esm/icons/info-circle-icon';
-import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
+import { ChartDonut, ChartPie, ChartThemeColor } from '@patternfly/react-charts';
 
 
 interface CovidDataProps {
@@ -25,184 +22,124 @@ interface CovidDataProps {
 
 interface CardState {
 	isCardExpanded: boolean;
-	isDropdownOpen: boolean;
 }
 
 const CovidDataCard = (props: CovidDataProps): JSX.Element => {
 
-    const [state, setState] = useState<CardState>({
+  const [state, setState] = useState<CardState>({
 		isCardExpanded: false,
-		isDropdownOpen: false
 	});
 
 	const onCardExpand = () => {
-		setState({
-			isCardExpanded: !state.isCardExpanded,
-			isDropdownOpen: false
-		});
+      setState({
+        isCardExpanded: !state.isCardExpanded
+      });
     };
-  
-	const onActionToggle = () => {
-		setState({
-			isCardExpanded: !state.isCardExpanded,
-			isDropdownOpen: !state.isDropdownOpen
-		});
-	};
-
-	const onActionSelect = () => {
-		setState({
-			isCardExpanded: false,
-			isDropdownOpen: !state.isDropdownOpen
-		});
-	};
 
 	const flagImage = <img className="flag" src={props.covidData.flagImageURL}/>;
 
+  const columns = ['Population', 'Cumulative Positive', 'Cumulative Deceased', 'Cumulative Recovered','Vaccine Type', 'First Dose', 'Second Dose'];
+  const rows = [
+    [props.covidData.population, props.covidData.cumulativePositive, props.covidData.cumulativeDeceased, props.covidData.cumulativeRecovered, 
+      props.covidData.vaccine, props.covidData.firstDose, props.covidData.secondDose]
+  ];
+
 	return (
-		<Card id="horizontal card" isExpanded={state.isCardExpanded}>
+		<Card id="covidDataCard" isExpanded={state.isCardExpanded}>
         <CardHeader
           onExpand={onCardExpand}
           toggleButtonProps={{
-            id: 'toggle-button',
-            'aria-label': 'Actions',
-            'aria-labelledby': 'titleId toggle-button',
+            id: 'toggleButtonCovid',
+            'aria-label': 'ActionsCovid',
+            'aria-labelledby': 'cardTitleCovid toggleButtonCovid',
             'aria-expanded': state.isCardExpanded
           }}
         >
-          {state.isCardExpanded && <CardTitle id="titleId">{props.covidData.countryName} {flagImage}</CardTitle>}
+          {state.isCardExpanded && <CardTitle id="cardTitleCovid">{props.covidData.countryName} {flagImage}</CardTitle>}
           {!state.isCardExpanded && (
             <Level hasGutter>
-              <CardTitle id="titleId">{props.covidData.countryName} {flagImage}</CardTitle>
+              <CardTitle id="cardTitleCovid">{props.covidData.countryName} {flagImage}</CardTitle>
+              {props.covidData.cumulativePositive != undefined && <Text>Cumulative Positive <Badge>{props.covidData.cumulativePositive}</Badge></Text>}
+              {props.covidData.cumulativeDeceased != undefined && <Text>Cumulative Deceased <Badge className="case-dec">{props.covidData.cumulativeDeceased}</Badge></Text>}
+              {props.covidData.firstDose != undefined && <Text>First Dose <Badge className="vacc-dose">{props.covidData.firstDose}</Badge></Text>}
+              {props.covidData.secondDose != undefined && <Text>Second Dose <Badge className="vacc-dose">{props.covidData.secondDose}</Badge></Text>}
             </Level>
           )}
         </CardHeader>
         <CardExpandableContent>
           <CardBody>
-            <Grid md={6} lg={3} hasGutter>
-              <Flex
-                spaceItems={{ default: 'spaceItemsLg' }}
-                alignItems={{ default: 'alignItemsFlexStart' }}
-                direction={{ default: 'column' }}
-              >
-                <Flex
-                  spaceItems={{ default: 'spaceItemsSm' }}
-                  alignItems={{ default: 'alignItemsFlexStart' }}
-                  direction={{ default: 'column' }}
-                  grow={{ default: 'grow' }}
-                >
-                  <Label icon={<InfoCircleIcon />} color="blue">
-                    Set up your cluster
-                  </Label>
-                  <p>Continue setting up your cluster to access all you cain in the Console</p>
-                  <List isPlain>
-                    <ListItem>
-                      <a href="#">Add identity provider</a>
-                    </ListItem>
-                    <ListItem>
-                      <a href="#">Configure alert receivers</a>
-                    </ListItem>
-                    <ListItem>
-                      <a href="#">Configure default ingress certificate</a>
-                    </ListItem>
-                  </List>
-                </Flex>
-                <Button href="#" component="a" variant="link" isInline icon={<ArrowRightIcon />} iconPosition="right">
-                  View all set up cluster steps
-                </Button>
-              </Flex>
-              <Flex
-                spaceItems={{ default: 'spaceItemsLg' }}
-                alignItems={{ default: 'alignItemsFlexStart' }}
-                direction={{ default: 'column' }}
-              >
-                <Flex
-                  spaceItems={{ default: 'spaceItemsSm' }}
-                  alignItems={{ default: 'alignItemsFlexStart' }}
-                  direction={{ default: 'column' }}
-                  grow={{ default: 'grow' }}
-                >
-                  <Label icon={<InfoCircleIcon />} color="purple">
-                    Guided tours
-                  </Label>
-                  <p>Tour some of the key features around the console</p>
-                  <List isPlain>
-                    <ListItem>
-                      <a href="#">Tour the console</a>
-                    </ListItem>
-                    <ListItem>
-                      <a href="#">Getting started with Serverless</a>
-                    </ListItem>
-                  </List>
-                </Flex>
-                <Button href="#" component="a" variant="link" isInline icon={<ArrowRightIcon />} iconPosition="right">
-                  View all guided tours
-                </Button>
-              </Flex>
-              <Flex
-                spaceItems={{ default: 'spaceItemsLg' }}
-                alignItems={{ default: 'alignItemsFlexStart' }}
-                direction={{ default: 'column' }}
-              >
-                <Flex
-                  spaceItems={{ default: 'spaceItemsSm' }}
-                  alignItems={{ default: 'alignItemsFlexStart' }}
-                  direction={{ default: 'column' }}
-                  grow={{ default: 'grow' }}
-                >
-                  <Label icon={<InfoCircleIcon />} color="green">
-                    Quick starts
-                  </Label>
-                  <p>Get started with features using our step-by-step documentation</p>
-                  <List isPlain>
-                    <ListItem>
-                      <a href="#">Getting started with Serverless</a>
-                    </ListItem>
-                    <ListItem>
-                      <a href="#">Explore virtualization</a>
-                    </ListItem>
-                    <ListItem>
-                      <a href="#">Build pipelines</a>
-                    </ListItem>
-                  </List>
-                </Flex>
-                <Button href="#" component="a" variant="link" isInline icon={<ArrowRightIcon />} iconPosition="right">
-                  View all quick starts
-                </Button>
-              </Flex>
-              <Flex
-                spaceItems={{ default: 'spaceItemsLg' }}
-                alignItems={{ default: 'alignItemsFlexStart' }}
-                direction={{ default: 'column' }}
-              >
-                <Flex
-                  spaceItems={{ default: 'spaceItemsSm' }}
-                  alignItems={{ default: 'alignItemsFlexStart' }}
-                  direction={{ default: 'column' }}
-                  grow={{ default: 'grow' }}
-                >
-                  <Label icon={<InfoCircleIcon />} color="orange">
-                    Learning resources
-                  </Label>
-                  <p>Learn about new features within the Console and get started with demo apps</p>
-                  <List isPlain>
-                    <ListItem>
-                      <a href="#">See what's possible with the Explore page</a>
-                    </ListItem>
-                    <ListItem>
-                      <a href="#">
-                        OpenShift 4.5: Top Tasks
-                        <ExternalLinkAltIcon />
-                      </a>
-                    </ListItem>
-                    <ListItem>
-                      <a href="#">Try a demo app</a>
-                    </ListItem>
-                  </List>
-                </Flex>
-                <Button href="#" component="a" variant="link" isInline icon={<ArrowRightIcon />} iconPosition="right">
-                  View all learning resources
-                </Button>
-              </Flex>
+            <Grid hasGutter>
+              <GridItem span={10}>
+      <TableComposable
+        aria-label="Simple table"
+      >
+        <Caption>Covid-19 data of {props.covidData.countryName} for year week {props.covidData.yearWeekISO}. </Caption>
+        <Thead>
+          <Tr>
+            {columns.map((column, columnIndex) => (
+              <Th key={columnIndex}>{column}</Th>
+            ))}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {rows.map((row, rowIndex) => (
+            <Tr key={rowIndex}>
+              {row.map((cell, cellIndex) => (
+                <Td key={`${rowIndex}_${cellIndex}`} dataLabel={columns[cellIndex]}>
+                  {cell}
+                </Td>
+              ))}
+            </Tr>
+          ))}
+        </Tbody>
+      </TableComposable>
+      </GridItem>   
+      <GridItem span={5}>
+      <div style={{ height: '230px', width: '400px' }}>
+          <ChartPie
+              ariaDesc="Covid Case Data"
+              ariaTitle="Covid Case Data Chart"
+              constrainToVisibleArea={true}
+              data={[{ x: 'Cumulative Positive', y: props.covidData.cumulativePositive }, { x: 'Cumulative Deceased', y: props.covidData.cumulativeDeceased }, { x: 'Cumulative Recovered', y: props.covidData.cumulativeRecovered }]}
+              height={230}
+              labels={({ datum }) => `${datum.x}: ${datum.y}`}
+              legendData={[{ name: 'C. Positive: ' + props.covidData.cumulativePositive }, { name: 'C. Deceased: '+ props.covidData.cumulativeDeceased }, { name: 'C. Recovered: '+props.covidData.cumulativeRecovered }]}
+              legendPosition="right"
+              legendOrientation="vertical"
+              padding={{
+                bottom: 20,
+                left: 20,
+                right: 145,
+                top: 20
+              }}
+              themeColor={ChartThemeColor.orange}
+              width={450}
+          />
+         </div>
+       </GridItem>
+        <GridItem span={5}>
+        <div style={{ height: '230px', width: '400px' }}>
+            <ChartDonut
+                  ariaDesc="Covid Vacc. Data"
+                  ariaTitle="Covid Vaccination Data Chart"
+                  constrainToVisibleArea={true}
+                  data={[{ x: 'First Dose', y: props.covidData.firstDose }, { x: 'Second Dose', y: props.covidData.secondDose }, { x: 'Unvaccinated', y: props.covidData.population - props.covidData.firstDose - props.covidData.secondDose }]}
+                  height={230}
+                  labels={({ datum }) => `${datum.x}: ${datum.y}`}
+                  legendData={[{ name: 'First Dose: ' + props.covidData.firstDose }, { name: 'Second Dose: '+ props.covidData.secondDose }, { name: 'Unvaccinated: '+ (props.covidData.population - props.covidData.firstDose - props.covidData.secondDose) }]}
+                  legendPosition="right"
+                  legendOrientation="vertical"
+                  padding={{
+                    bottom: 20,
+                    left: 20,
+                    right: 145,
+                    top: 20
+                  }}
+                  themeColor={ChartThemeColor.green}
+                  width={450}
+              />
+          </div>
+        </GridItem>
             </Grid>
           </CardBody>
         </CardExpandableContent>
