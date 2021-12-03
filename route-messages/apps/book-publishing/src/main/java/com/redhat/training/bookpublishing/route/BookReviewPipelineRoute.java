@@ -10,7 +10,7 @@ public class BookReviewPipelineRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        // TODO: Create a route for the book reviewing pipeline
+        // TODO: Create a route for the book review pipeline
 
     }
 }
