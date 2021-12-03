@@ -116,6 +116,7 @@ public class BookReviewPipelineRouteTest {
 	private String novelContent() {
 		return "<book><bookinfo><productname>novel</productname></bookinfo></book>";
 	}
+
 	private String wrongContent() {
 		return "<book><bookinfo><productname>wrong_type</productname></bookinfo></book>";
 	}
