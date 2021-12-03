@@ -13,11 +13,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
-@RunWith( CamelSpringBootRunner.class )
-@SpringBootTest
+@RunWith(CamelSpringBootRunner.class)
+@SpringBootTest(
+		properties = { "camel.springboot.java-routes-include-pattern=**/BookPrinting*"}
+)
 @UseAdviceWith
-public class BookPipelineRouteTest {
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+public class BookPrintingPipelineRouteTest {
 
 	@Autowired
 	private ProducerTemplate template;
@@ -25,11 +29,11 @@ public class BookPipelineRouteTest {
 	@Autowired
 	private CamelContext context;
 
-	@EndpointInject(uri = "mock:file:editor")
-	MockEndpoint fileMockEditor;
+	@EndpointInject(uri = "mock:file:technical")
+	MockEndpoint fileMockTechnical;
 
-	@EndpointInject(uri = "mock:file:graphic_designer")
-	MockEndpoint fileMockGraphicDesigner;
+	@EndpointInject(uri = "mock:file:novel")
+	MockEndpoint fileMockNovel;
 
 	@Before
 	public void setUp() throws Exception {
@@ -43,49 +47,49 @@ public class BookPipelineRouteTest {
 	}
 
 	@Test
-	public void technicalBookIsDeliveredToEditorAndGraphicalDesigner() throws Exception {
-		fileMockEditor.expectedMessageCount(1);
-		fileMockGraphicDesigner.expectedMessageCount(1);
+	public void technicalBookIsDeliveredToTechnicalDirectory() throws Exception {
+		fileMockTechnical.expectedMessageCount(1);
+		fileMockNovel.expectedMessageCount(0);
 
 		template.sendBody(
-			"direct:manuscripts",
+			"direct:ready-for-printing",
 			technicalContent()
 		);
 
-		fileMockEditor.assertIsSatisfied();
-		fileMockGraphicDesigner.assertIsSatisfied();
+		fileMockTechnical.assertIsSatisfied();
+		fileMockNovel.assertIsSatisfied();
 	}
 
 	@Test
-	public void novelBookIsDeliveredToEditor() throws Exception {
-		fileMockEditor.expectedMessageCount(1);
-		fileMockGraphicDesigner.expectedMessageCount(0);
+	public void novelBookIsDeliveredToNovelDirectory() throws Exception {
+		fileMockTechnical.expectedMessageCount(0);
+		fileMockNovel.expectedMessageCount(1);
 
 		template.sendBody(
-				"direct:manuscripts",
+				"direct:ready-for-printing",
 				novelContent()
 		);
 
-		fileMockEditor.assertIsSatisfied();
-		fileMockGraphicDesigner.assertIsSatisfied();
+		fileMockTechnical.assertIsSatisfied();
+		fileMockNovel.assertIsSatisfied();
 	}
 
 	private void mockRouteEndpoints() throws Exception {
-		context.getRouteDefinition( "book-pipeline" )
+		context.getRouteDefinition("book-printing-pipeline")
 		    .adviceWith(
 			    context,
 				new AdviceWithRouteBuilder() {
 					@Override
 					public void configure() {
-						replaceFromWith( "direct:manuscripts" );
+						replaceFromWith("direct:ready-for-printing");
 
-						interceptSendToEndpoint("file://data/pipeline/editor")
+						interceptSendToEndpoint("file://data/printing-services/technical")
 						    .skipSendToOriginalEndpoint()
-							.to("mock:file:editor");
+							.to("mock:file:technical");
 
-						interceptSendToEndpoint("file://data/pipeline/graphic-designer")
+						interceptSendToEndpoint("file://data/printing-services/novel")
 							.skipSendToOriginalEndpoint()
-							.to("mock:file:graphic_designer");
+							.to("mock:file:novel");
 					}
 				}
 			);

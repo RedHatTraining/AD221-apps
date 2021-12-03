@@ -1,4 +1,4 @@
-package com.redhat.training.bookpublishing;
+package com.redhat.training.bookpublishing.strategy;
 
 import org.apache.camel.language.XPath;
 
