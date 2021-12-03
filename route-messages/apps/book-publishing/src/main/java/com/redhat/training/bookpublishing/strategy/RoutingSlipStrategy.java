@@ -9,6 +9,6 @@ public class RoutingSlipStrategy {
             @XPath(value="/book/bookinfo/productname/text()") String type
     ) {
         // TODO: Create a strategy for the review pipeline
-
+        return "";
     }
 }
