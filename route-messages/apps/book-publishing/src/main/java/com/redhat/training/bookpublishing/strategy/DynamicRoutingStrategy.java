@@ -7,6 +7,6 @@ public class DynamicRoutingStrategy {
             @XPath(value="/book/bookinfo/productname/text()") String type
     ) {
         // TODO: Create a strategy for the printing pipeline
-        return "file://data/printing-services/" + type;
+
     }
 }

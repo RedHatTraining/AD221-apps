@@ -8,6 +8,7 @@ public class RoutingSlipStrategy {
     public String compute(
             @XPath(value="/book/bookinfo/productname/text()") String type
     ) {
+        // TODO: Create a strategy for the review pipeline
         ArrayList<String> destinations = new ArrayList<>();
 
         switch (type) {
