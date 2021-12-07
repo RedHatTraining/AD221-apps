@@ -32,6 +32,12 @@ public class CovidDataRouteBuilder extends RouteBuilder {
     @Value("${sftp.password}")
     private String sftpPassword;
 
+    @Value("${sftp.host}")
+    private String sftpHost;
+
+    @Value("${sftp.port}")
+    private Integer sftpPort;
+
     @Override
     public void configure() throws Exception {
 
@@ -45,8 +51,8 @@ public class CovidDataRouteBuilder extends RouteBuilder {
 
         URI casesDataURL = new URIBuilder()
             .setScheme("sftp")
-            .setHost("127.0.0.1")
-            .setPort(2222)
+            .setHost(sftpHost)
+            .setPort(sftpPort)
             .setPath("/")
             .addParameter("username", sftpUsername)
             .addParameter("password", sftpPassword)
@@ -56,8 +62,8 @@ public class CovidDataRouteBuilder extends RouteBuilder {
 
         URI vaccinationDataURL = new URIBuilder()
             .setScheme("sftp")
-            .setHost("127.0.0.1")
-            .setPort(2222)
+            .setHost(sftpHost)
+            .setPort(sftpPort)
             .setPath("/")
             .addParameter("username", sftpUsername)
             .addParameter("password", sftpPassword)
