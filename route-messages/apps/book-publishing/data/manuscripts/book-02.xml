@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+    <bookinfo>
+        <title>Book 02</title>
+        <productname>novel</productname>
+        <edition>0</edition>
+    </bookinfo>
+    <chapter>
+        <title>Lorem</title>
+        <section>
+            <title>Ipsum</title>
+            <para>
+                Donec malesuada risus eu nunc tempus, a volutpat nisi ullamcorper. Vestibulum dapibus sollicitudin nisl,
+                a ultrices sem auctor et. Duis vel leo rutrum, aliquet ante eget, consequat quam. Nam ipsum tortor,
+                condimentum et facilisis eu, pharetra eu turpis. Etiam ut lacus ac mi commodo maximus at vitae neque.
+                Nam ornare lorem vitae justo ornare, vel posuere tellus placerat. Aliquam maximus consequat leo.
+                Suspendisse ornare nibh in dui dapibus, viverra pretium lectus rutrum.
+            </para>
+        </section>
+    </chapter>
+</book>
