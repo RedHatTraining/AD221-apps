@@ -5,7 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BookPrintingPipelineRoute extends RouteBuilder {
+public class BookPrintingPipelineRouteBuilder extends RouteBuilder {
     private final String ROUTING_HEADER = "destination";
 
     @Override

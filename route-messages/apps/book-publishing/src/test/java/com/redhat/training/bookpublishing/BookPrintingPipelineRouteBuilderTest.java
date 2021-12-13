@@ -21,7 +21,7 @@ import org.springframework.test.annotation.DirtiesContext;
 )
 @UseAdviceWith
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class BookPrintingPipelineRouteTest {
+public class BookPrintingPipelineRouteBuilderTest {
 
 	@Autowired
 	private ProducerTemplate template;

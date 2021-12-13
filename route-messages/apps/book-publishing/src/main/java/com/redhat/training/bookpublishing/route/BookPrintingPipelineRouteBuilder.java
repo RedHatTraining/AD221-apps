@@ -1,16 +1,16 @@
 package com.redhat.training.bookpublishing.route;
 
-import com.redhat.training.bookpublishing.strategy.RoutingSlipStrategy;
+import com.redhat.training.bookpublishing.strategy.DynamicRoutingStrategy;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BookReviewPipelineRoute extends RouteBuilder {
+public class BookPrintingPipelineRouteBuilder extends RouteBuilder {
     private final String ROUTING_HEADER = "destination";
 
     @Override
     public void configure() throws Exception {
-        // TODO: Create a route for the book review pipeline
+        // TODO: Create a route for the printing pipeline
 
     }
 }
