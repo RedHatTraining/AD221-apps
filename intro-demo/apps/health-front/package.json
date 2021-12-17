@@ -11,6 +11,7 @@
     "build": "webpack --config webpack.prod.js",
     "start": "sirv dist --cors --single --host --port 8082",
     "start:dev": "webpack serve --color --progress --config webpack.dev.js --port 8082",
+    "install-start:dev": "install webpack serve --color --progress --config webpack.dev.js --port 8082",
     "eslint": "eslint --ext .tsx,.js ./src/",
     "lint": "npm run eslint",
     "format": "prettier --check --write ./src/**/*.{tsx,ts}",
