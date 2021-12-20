@@ -37,7 +37,7 @@ Covic-19 cases overall data for European countries:
 (.venv) [user@host data]$ curl -XGET http://localhost:8080/camel/cases
 ----
 
-Covic-19 weekly vaccination data for European countries:
+Covid-19 weekly vaccination data for European countries:
 
 [source,sh]
 ----
