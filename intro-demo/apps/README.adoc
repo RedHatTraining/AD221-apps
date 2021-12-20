@@ -30,7 +30,7 @@ To build and run the gateway application go into the `health-gateway` directory 
 
 Validate the REST APIs are working.
 
-Covic-19 cases overall data for European countries:
+Covid-19 cases overall data for European countries:
 
 [source,sh]
 ----
