@@ -1,0 +1,32 @@
+html, body, #root {
+  height: 100%;
+}
+
+.logo {
+  width: 8em;
+}
+
+.flag {
+  height: 16px;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+
+.pf-c-badge.pf-m-unread.vacc-dose {
+  --pf-c-badge--Color: var(--pf-c-badge--m-unread--Color);
+  --pf-c-badge--BackgroundColor: green;
+}
+
+.pf-c-badge.pf-m-unread.case-dec {
+  --pf-c-badge--Color: var(--pf-c-badge--m-unread--Color);
+  --pf-c-badge--BackgroundColor: black;
+}

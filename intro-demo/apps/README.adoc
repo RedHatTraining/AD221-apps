@@ -1,0 +1,46 @@
+# Demo Application
+
+
+## Health Gateway Application
+
+## Data sources
+
+https://data.europa.eu/data/datasets/data-by-country?locale=en
+
+https://data.europa.eu/data/datasets/covid-19-vaccine-tracker?locale=en
+
+## Running the Demo
+
+To run the SFTP server, navigate to the `resources/data` directory and run the following python script in a python venv:
+
+[source,sh]
+----
+(.venv) [user@host data]$ python ../../scripts/sftp_server.py -k ~/.ssh/id_rsa
+----
+
+The `-k` property in the command should be a private ssh key that you must provide.
+
+To build and run the gateway application go into the `health-gateway` directory and run the following command:app-name: 
+
+
+[source,sh]
+----
+(.venv) [user@host data]$ ./mvnw clean package spring-boot:run
+----
+
+Validate the REST APIs are working.
+
+Covid-19 cases overall data for European countries:
+
+[source,sh]
+----
+(.venv) [user@host data]$ curl -XGET http://localhost:8080/camel/cases
+----
+
+Covid-19 weekly vaccination data for European countries:
+
+[source,sh]
+----
+(.venv) [user@host data]$ curl -XGET http://localhost:8080/camel/vaccinations
+----
+
