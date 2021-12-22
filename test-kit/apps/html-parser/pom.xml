@@ -30,20 +30,6 @@
 			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
 		 <!-- TODO Add camel test dependencies here -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test-spring</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jetty</artifactId>
-		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
