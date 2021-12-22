@@ -17,9 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 
+
 // TODO: add annotations
-@RunWith( CamelSpringBootRunner.class )
-@SpringBootTest( classes = Application.class )
 public class HtmlRouteBuilderTest {
 
 	@Autowired
@@ -75,18 +74,15 @@ public class HtmlRouteBuilderTest {
 	@Test
 	public void testRouteParsesLatestErrorText() throws Exception {
 		// TODO: read errors file
-		String errorsHtml = new String( errors.getInputStream().readAllBytes() );
 
 		// TODO: send errorsHtml as the body to direct:parseHtmlErrors
-		producerTemplate.sendBody( "direct:parseHtmlErrors", errorsHtml );
 
 		Thread.sleep(2);
 
 		// TODO: receive the body from file:out
-		String body = consumerTemplate.receiveBody( "file:out", String.class );
 
 		// TODO: assert body contains a portion of the first article
-		assertTrue( body.contains( "Exception occurred during execution on the exchange" ) );
+		assertTrue(false);
 	}
 
 }
