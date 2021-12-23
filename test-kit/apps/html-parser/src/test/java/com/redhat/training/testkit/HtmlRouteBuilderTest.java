@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.test.junit4.CamelTestSupport;
+import org.apache.camel.test.junit4.TestSupport;
 import org.apache.camel.test.spring.CamelSpringBootRunner;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -35,7 +35,7 @@ public class HtmlRouteBuilderTest {
 
 	@AfterEach
 	public void after() throws IOException {
-		CamelTestSupport.deleteDirectory( "out" );
+		TestSupport.deleteDirectory( "out" );
 	}
 
 	@Test
