@@ -1,11 +1,8 @@
 package com.redhat.training.model;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CommandConfiguration {
@@ -16,6 +13,10 @@ public class CommandConfiguration {
     private Date sentDate;
 
     public CommandConfiguration(String configStr) {
+        if(!configStr.contains("|") || !configStr.contains("=")){
+            throw new RuntimeException("Format not supported");
+        }
+
         Stream.of(configStr.split("\\|"))
         .map(s -> s.split("="))
         .forEach(a -> {
