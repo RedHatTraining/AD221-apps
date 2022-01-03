@@ -1,7 +1,5 @@
 package com.redhat.training.route;
 
-import java.net.ConnectException;
-
 import com.redhat.training.model.CommandConfigurationCSVRecord;
 
 import org.apache.camel.Exchange;
@@ -35,5 +33,5 @@ public class CommandConfigurationRouteBuilder extends RouteBuilder {
         from("direct:logReturnCode")
         .log("${body}");
 
-    } 
+    }
 }
