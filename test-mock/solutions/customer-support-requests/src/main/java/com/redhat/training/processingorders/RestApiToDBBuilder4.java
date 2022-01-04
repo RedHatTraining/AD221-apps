@@ -8,12 +8,6 @@ public class RestApiToDBBuilder4 extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        // from("{{http_route.start}}")
-        //     .routeId("rrrrrrrouteHttp_____")
-        //     .to("http://localhost:8080")
-        //     .log("${body}")
-        //     .to("file:outputhttp?fileName=response.txt");
-
         from("{{http_route.start}}")
             .to("{{http_route.http_server}}")
             .to("file:outputhttp?fileName=response.txt");
