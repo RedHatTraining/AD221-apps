@@ -19,10 +19,5 @@ public class FtpToFileRouteBuilder extends RouteBuilder {
         .routeId("ftpRoute")
         .log("File: ${header.CamelFileName}")
         .to("file:customer_requests/");
-
-
-        from("direct:a")
-            .routeId("myroute1")
-            .to("{{routea.destination}}");
     }
 }
