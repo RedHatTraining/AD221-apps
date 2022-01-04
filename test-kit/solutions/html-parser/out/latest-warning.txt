@@ -1,0 +1,4 @@
+.venv/lib64/python3.6/site-packages/pip/_vendor/packaging/version.py:114: 596 warnings
+                    /opt/shopping-cart/.venv/lib64/python3.6/site-packages/pip/_vendor/packaging/version.py:114: DeprecationWarning: Creating a LegacyVersion has been deprecated and will be removed in the next major release
+                        DeprecationWarning
+                

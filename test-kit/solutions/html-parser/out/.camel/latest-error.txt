@@ -1,0 +1,5 @@
+2021-12-22 10:35:24.637  ERROR 413970 --- [main] c.r.t.testkit.HtmlRouteBuilderTestorg.apache.camel.CamelExecutionException: Exception occurred during execution on the exchange: Exchange[ID-localhost]
+                    at org.apache.camel.util.ObjectHelper.wrapCamelExecutionException(ObjectHelper.java:1842)
+                    at org.apache.camel.util.ExchangeHelper.extractResultBody(ExchangeHelper.java:745)
+                    at org.apache.camel.impl.DefaultProducerTemplate.extractResultBody(DefaultProducerTemplate.java:515)
+            
