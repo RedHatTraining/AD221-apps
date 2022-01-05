@@ -1,4 +1,4 @@
-package com.redhat.training.processingorders;
+package com.redhat.training.downloader;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
-	<artifactId>processing-orders</artifactId>
+	<artifactId>http-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>processing-orders</name>
-	<description>GE: Processing Orders with the File Component</description>
+	<name>http-client</name>
+	<description>GE: Test routes by using mocks</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<fuse.version>7.9.0.fuse-sb2-790065-redhat-00001</fuse.version>
+		<fuse.version>7.10.0.fuse-sb2-7_10_0-00014-redhat-00001</fuse.version>
 		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
 	</properties>
 	<dependencyManagement>
@@ -28,15 +28,7 @@
 		<!-- TODO add FTP camel component dependency -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-ftp</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jetty</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-http</artifactId>
+			<artifactId>camel-http4</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -71,22 +63,22 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
+					<source>11</source>
+					<target>11</target>
+				  </configuration>
+			  </plugin>
+			  <plugin>
 				<groupId>org.jboss.redhat-fuse</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${fuse.version}</version>
 				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
+				  <execution>
+					<goals>
+					  <goal>repackage</goal>
+					</goals>
+				  </execution>
 				</executions>
-			</plugin>
+			  </plugin>
 		</plugins>
 	</build>
 
