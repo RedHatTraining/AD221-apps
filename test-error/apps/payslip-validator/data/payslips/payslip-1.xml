@@ -1,0 +1,24 @@
+<payslip>
+	<payslipId>1</payslipId>
+	<payslipDate>2018-07-10T12:01:00-05:00</payslipDate>
+	<totalPayslip>5239.80</totalPayslip>
+	<employee>
+		<address>
+			<country/>
+		</address>
+	</employee>
+	<payslipItems>
+		<payslipItem>
+			<payslipItemId>123</payslipItemId>
+			<payslipItemQty>30</payslipItemQty>
+			<description>Base Salary</description>
+			<payslipItemPrice>123.45</payslipItemPrice>
+		</payslipItem>
+		<payslipItem>
+			<payslipItemId>987</payslipItemId>
+			<payslipItemQty>1.5</payslipItemQty>
+			<description>Bonus</description>
+			<payslipItemPrice>1024.20</payslipItemPrice>
+		</payslipItem>
+	</payslipItems>
+</payslip>
