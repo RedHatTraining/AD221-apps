@@ -1,12 +1,15 @@
 package com.redhat.training.payslipvalidator.processor;
 
-import static org.apache.camel.builder.xml.XPathBuilder.xpath;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static org.apache.camel.builder.xml.XPathBuilder.xpath;
 
 public class PriceProcessor implements Processor {
 
@@ -23,30 +26,32 @@ public class PriceProcessor implements Processor {
 				"/payslip/payslipItems/node()"
 		).evaluate(exchange, NodeList.class);
 
-		double calculatedTotal = 0;
+		Stream<Node> payslipItemsStream = IntStream.range(0, payslipItems.getLength())
+				.mapToObj(payslipItems::item);
 
-		for (int i = 0; i < payslipItems.getLength(); i++) {
-			if (payslipItems.item(i).getNodeType() == Node.ELEMENT_NODE) {
-				Element payslipItem = (Element) payslipItems.item(i);
-
-				int qty = Integer.parseInt(
-						payslipItem.getElementsByTagName("payslipItemQty")
-								.item(0).getTextContent()
-				);
-
-				double price = Double.parseDouble(
-						payslipItem.getElementsByTagName("payslipItemPrice")
-								.item(0).getTextContent()
-				);
-
-				calculatedTotal += (qty * price);
-			}
-		}
+		double calculatedTotal = payslipItemsStream.filter(node -> node.getNodeType() == Node.ELEMENT_NODE)
+				.mapToDouble(this::calculateItemTotal).sum();
 
 		if (payslipTotal != calculatedTotal) {
-			throw new WrongTotalPayslipCalculation();
+			throw new WrongTotalPayslipCalculationException();
 		}
 
 		exchange.getIn().setHeader("totalPrice", calculatedTotal);
+	}
+
+	private double calculateItemTotal(Node node) {
+		Element payslipItem = (Element) node;
+
+		int qty = Integer.parseInt(
+				payslipItem.getElementsByTagName("payslipItemQty")
+						.item(0).getTextContent()
+		);
+
+		double price = Double.parseDouble(
+				payslipItem.getElementsByTagName("payslipItemPrice")
+						.item(0).getTextContent()
+		);
+
+		return qty * price;
 	}
 }

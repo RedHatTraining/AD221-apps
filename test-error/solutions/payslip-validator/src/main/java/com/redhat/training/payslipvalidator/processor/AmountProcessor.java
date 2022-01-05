@@ -1,10 +1,14 @@
 package com.redhat.training.payslipvalidator.processor;
 
-import static org.apache.camel.builder.xml.XPathBuilder.xpath;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static org.apache.camel.builder.xml.XPathBuilder.xpath;
 
 public class AmountProcessor implements Processor {
 
@@ -14,13 +18,12 @@ public class AmountProcessor implements Processor {
 				"/payslip/payslipItems/payslipItem/payslipItemQty/text()"
 		).evaluate(exchange, NodeList.class);
 
-		int total = 0;
+		Stream<Node> nodeStream = IntStream.range(0, result.getLength())
+				.mapToObj(result::item);
 
-		for (int i = 0; i < result.getLength(); i++) {
-			int value = Integer.parseInt(result.item(i).getNodeValue());
-			total += value;
-		}
-
-		exchange.getIn().setHeader("totalPayslipUnits", total);
+		exchange.getIn().setHeader(
+				"totalPayslipUnits",
+				nodeStream.mapToInt(node -> Integer.parseInt(node.getNodeValue())).sum()
+		);
 	}
 }
