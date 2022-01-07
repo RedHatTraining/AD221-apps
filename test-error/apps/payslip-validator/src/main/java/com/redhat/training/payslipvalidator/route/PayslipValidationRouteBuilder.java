@@ -17,10 +17,10 @@ public class PayslipValidationRouteBuilder extends RouteBuilder {
         from("file://data/payslips?noop=true")
             .routeId("amount-process")
             .process(new AmountProcessor())
-        .to("direct:process")
+        .to("direct:process");
 
         from("direct:process")
-            .routeId("price-price")
+            .routeId("price-process")
             .process(new PriceProcessor())
         .to("file://data/validation/correct");
     }

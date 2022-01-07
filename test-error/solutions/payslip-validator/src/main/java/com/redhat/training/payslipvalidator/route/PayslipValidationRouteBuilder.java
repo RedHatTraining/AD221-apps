@@ -11,7 +11,6 @@ public class PayslipValidationRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         // TODO: Handle errors with the onException clause
         onException(NumberFormatException.class)
-            .routeId("number-format-exception")
             .to("file://data/validation/error-price")
             .handled(true);
 
@@ -30,7 +29,7 @@ public class PayslipValidationRouteBuilder extends RouteBuilder {
             .endDoTry();
 
         from("direct:process")
-            .routeId("price-price")
+            .routeId("price-process")
             .process(new PriceProcessor())
         .to("file://data/validation/correct");
     }
