@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CombineRouteBuilder extends RouteBuilder {
 
-    protected static final String ROUTE_ID = "split-combine-pipeline";
-    protected static final String OUTPUT_FILE = "file:orders/outgoing?fileName=orders2.csv";
+    private static final String ROUTE_ID = "split-combine-pipeline";
+    private static final String OUTPUT_FILE = "file:orders/outgoing?fileName=orders2.csv";
     private static final String INCOMING_FILE = "file:orders/incoming?noop=true";
     private static final String SEPARATOR = System.getProperty( "line.separator" );
     private static final int BATCH_COMPLETION_INTERVAL = 10;

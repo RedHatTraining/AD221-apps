@@ -20,6 +20,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @UseAdviceWith
 @DirtiesContext( classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD )
 public class PatternCombineRouteBuilderTest {
+	private static final String ROUTE_ID = "split-combine-pipeline";
+    private static final String OUTPUT_FILE = "file:orders/outgoing?fileName=orders2.csv";
 	private static final String SEPARATOR = System.getProperty( "line.separator" );
 	private static final String MOCK_FILE_OUTPUT = "mock:file:output";
 	private static final String DIRECT_INPUT = "direct:input";
@@ -45,7 +47,7 @@ public class PatternCombineRouteBuilderTest {
 	}
 
 	@Test
-	public void technicalBookIsDeliveredToTechnicalDirectory() throws Exception {
+	public void tenLinesOneGroup() throws Exception {
 		outputFileMock.expectedMessageCount( 1 );
 
 		template.sendBody( DIRECT_INPUT, content() );
@@ -54,7 +56,7 @@ public class PatternCombineRouteBuilderTest {
 	}
 
 	private void mockRouteEndpoints() throws Exception {
-		context.getRouteDefinition( CombineRouteBuilder.ROUTE_ID )
+		context.getRouteDefinition( ROUTE_ID )
 				.adviceWith(
 						context,
 						new AdviceWithRouteBuilder() {
@@ -62,7 +64,7 @@ public class PatternCombineRouteBuilderTest {
 							public void configure() {
 								replaceFromWith( DIRECT_INPUT );
 
-								interceptSendToEndpoint( CombineRouteBuilder.OUTPUT_FILE )
+								interceptSendToEndpoint( OUTPUT_FILE )
 										.skipSendToOriginalEndpoint()
 										.to( MOCK_FILE_OUTPUT );
 							}
