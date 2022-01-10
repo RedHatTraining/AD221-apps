@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CombineRouteBuilder extends RouteBuilder {
-    private static String separator = System.getProperty("line.separator");
+    private static String SEPARATOR = System.getProperty("line.separator");
 
     @Override
     public void configure() throws Exception {
