@@ -7,17 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CombineRouteBuilder extends RouteBuilder {
-
-    private static final String ROUTE_ID = "split-combine-pipeline";
-    private static final String OUTPUT_FILE = "file:orders/outgoing?fileName=orders2.csv";
-    private static final String INCOMING_FILE = "file:orders/incoming?noop=true";
     private static final String SEPARATOR = System.getProperty( "line.separator" );
-    private static final int BATCH_COMPLETION_INTERVAL = 10;
 
     @Override
     public void configure() throws Exception {
-        from( INCOMING_FILE )
-        .routeId( ROUTE_ID )
+        from( "file:orders/incoming?noop=true" )
+        .routeId( "split-combine-pipeline" )
             .split( body().tokenize( SEPARATOR ) )
             .aggregate( constant(true), new AggregationStrategy() {
                 public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
@@ -31,7 +26,7 @@ public class CombineRouteBuilder extends RouteBuilder {
                     return oldExchange;
                 }
             } )
-            .completionSize( BATCH_COMPLETION_INTERVAL )
-            .to( OUTPUT_FILE );
+            .completionSize( 10 )
+            .to( "file:orders/outgoing?fileName=orders2.csv" );
     }
 }
