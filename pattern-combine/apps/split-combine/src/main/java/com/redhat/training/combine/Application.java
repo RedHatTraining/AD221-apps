@@ -1,4 +1,4 @@
-package com.redhat.training.processor;
+package com.redhat.training.combine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
