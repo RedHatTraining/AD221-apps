@@ -7,26 +7,23 @@ import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.camel.component.jms.JmsComponent;
 import javax.jms.JMSException;
 
-//TODO: Enable the route by extending the RouteBuilder superclass
-@Component
-public class SchedulerRouteBuilder extends RouteBuilder {
+//import org.apache.camel.model.dataformat.XmlJsonDataFormat;
 
-    //TODO: Implement the configure method
+@Component
+public class TransformRouteBuilder extends RouteBuilder {
+
+    //TODO add the XmlJsonDataFormat
+
     @Override
     public void configure() throws Exception {
 
-	    from("scheduler:myScheduler?delay=2000")
-	    .routeId("Java DSL route")
-	    .setBody().simple("Current time is ${header.CamelTimerFiredTime}")
-        .log("Sending message to the body logging route")
-        .to("direct:log_body")
-        .to("jms:queue:orderInput");
+        from("jms:queue:orderInput")
+            .routeId("Transforming Orders")
+            .marshal().jaxb()
+            .log("XML Body: ${body}")
+            .to("mock:fufillmentSystem");
 
-/*       from("jms:queue:orderInput")
-        .routeId("Java DSL route 2")
-        .log("Pulled the message from the queue")
-        .to("direct:log_body"); */
-
+        //TODO add direct route to mock order log end point
     }
 
     @Bean

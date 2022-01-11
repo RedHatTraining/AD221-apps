@@ -3,17 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
-	<artifactId>hello-world</artifactId>
+	<artifactId>transform-messages</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hello-world</name>
+	<name>transform-messages</name>
 	<description>GE: Generating Hello World Messages with the Scheduler Component</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<fuse.version>7.9.0.fuse-sb2-790065-redhat-00001</fuse.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -27,7 +25,33 @@
 		</dependencies>
 	  </dependencyManagement>
 	<dependencies>
-		<!-- TODO: add camel dependencies -->
+		<!-- camel dependencies -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- JMS dependencies -->
+		<dependency>
+    		<groupId>org.apache.activemq</groupId>
+    		<artifactId>artemis-jms-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms-starter</artifactId>
+		</dependency>
+		<!-- TODO Add jaxb dependency here -->
+		<!-- TODO Add camel-xmljson and xom dependencies here -->
+		<!-- TODO Add camel-jsonpath dependency here -->
 	</dependencies>
 	<repositories>
 		<repository>
