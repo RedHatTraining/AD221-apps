@@ -1,0 +1,30 @@
+<payslip>
+	<payslipId>2</payslipId>
+	<payslipDate>2016-12-10T12:01:00-05:00</payslipDate>
+	<totalPayslip>4750.50</totalPayslip>
+	<employee>
+		<address>
+			<country/>
+		</address>
+	</employee>
+	<payslipItems>
+		<payslipItem>
+			<payslipItemId>123</payslipItemId>
+			<payslipItemQty>30</payslipItemQty>
+			<description>Base Salary</description>
+			<payslipItemPrice>150.84</payslipItemPrice>
+		</payslipItem>
+		<payslipItem>
+			<payslipItemId>456</payslipItemId>
+			<payslipItemQty>1</payslipItemQty>
+			<description>Award</description>
+			<payslipItemPrice>NA</payslipItemPrice>
+		</payslipItem>
+		<payslipItem>
+			<payslipItemId>987</payslipItemId>
+			<payslipItemQty>1</payslipItemQty>
+			<description>Bonus</description>
+			<payslipItemPrice>225.30</payslipItemPrice>
+		</payslipItem>
+	</payslipItems>
+</payslip>
