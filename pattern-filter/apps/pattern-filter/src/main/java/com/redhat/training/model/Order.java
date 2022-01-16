@@ -9,6 +9,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 @XmlRootElement
@@ -17,6 +18,7 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	@XmlTransient
 	private Date orderDate = new Date();
 	private BigDecimal discount;
 	private Boolean delivered=false;
