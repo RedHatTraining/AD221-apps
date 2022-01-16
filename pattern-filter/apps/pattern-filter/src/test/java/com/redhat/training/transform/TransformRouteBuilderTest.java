@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 import java.lang.Integer;
 import java.time.ZonedDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -36,9 +37,10 @@ public class TransformRouteBuilderTest {
     @Test
     public void testLogOrderRoute() throws Exception {
         // Sets an assertion
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse("2015-05-05 10:15:30[Asia/Calcutta]", formatter);
-        Date testDate = Date.from(zonedDateTime.toInstant());
+        ZonedDateTime dt2 = ZonedDateTime.parse("2015-May-05 10:15:30",
+        DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm:ss").withZone(ZoneId.of("UTC")));
+
+        Date testDate = Date.from(dt2.toInstant());
 
         String exectedJson = "{\"orderItems\":[{\"extPrice\":\"10\","
             + "\"id\":\"1\",\"item\":{\"author\":\"ci1 author\","
@@ -56,7 +58,7 @@ public class TransformRouteBuilderTest {
             + "\"lastName\":\"Anderson\",\"password\":\"password\","
             + "\"username\":\"tanderson\"},\"delivered\":\"false\","
             + "\"discount\":\"0.012\",\"id\":\"5\","
-            + "\"orderDate\":\"2015-05-05T03:15:30-05:00\"}";
+            + "\"orderDate\":\"2015-05-05T03:15:30+00:00\"}";
 
         mock.expectedBodiesReceived(exectedJson);
 
