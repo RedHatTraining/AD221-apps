@@ -37,7 +37,7 @@ public class TransformRouteBuilderTest {
     public void testLogOrderRoute() throws Exception {
         // Sets an assertion
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse("2015-05-05 10:15:30 Europe/Paris", formatter);
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse("2015-05-05 10:15:30[Asia/Calcutta]", formatter);
         Date testDate = Date.from(zonedDateTime.toInstant());
 
         String exectedJson = "{\"orderItems\":[{\"extPrice\":\"10\","
