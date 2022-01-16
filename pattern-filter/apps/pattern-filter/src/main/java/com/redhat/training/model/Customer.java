@@ -134,61 +134,75 @@ public class Customer implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+
 		if (obj == null)
 			return false;
+
 		if (getClass() != obj.getClass())
 			return false;
+
 		Customer other = (Customer) obj;
+
 		if (admin == null) {
 			if (other.admin != null)
 				return false;
 		} else if (!admin.equals(other.admin))
 			return false;
+
 		if (billingAddress == null) {
 			if (other.billingAddress != null)
 				return false;
 		} else if (!billingAddress.equals(other.billingAddress))
 			return false;
+
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+
 		if (orders == null) {
 			if (other.orders != null)
 				return false;
 		} else if (!orders.equals(other.orders))
 			return false;
+
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+
 		if (shippingAddress == null) {
 			if (other.shippingAddress != null)
 				return false;
 		} else if (!shippingAddress.equals(other.shippingAddress))
 			return false;
+
 		if (username == null) {
 			if (other.username != null)
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
+			
 		return true;
 	}
 

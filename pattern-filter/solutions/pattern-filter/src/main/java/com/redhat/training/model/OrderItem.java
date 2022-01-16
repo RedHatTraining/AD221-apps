@@ -60,31 +60,38 @@ public class OrderItem implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+
 		if (obj == null)
 			return false;
+
 		if (getClass() != obj.getClass())
 			return false;
+
 		OrderItem other = (OrderItem) obj;
 		if (extPrice == null) {
 			if (other.extPrice != null)
 				return false;
 		} else if (!extPrice.equals(other.extPrice))
 			return false;
+
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+
 		if (item == null) {
 			if (other.item != null)
 				return false;
 		} else if (!item.equals(other.item))
 			return false;
+
 		if (quantity == null) {
 			if (other.quantity != null)
 				return false;
 		} else if (!quantity.equals(other.quantity))
 			return false;
+			
 		return true;
 	}
 }

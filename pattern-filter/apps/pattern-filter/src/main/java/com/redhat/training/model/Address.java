@@ -96,53 +96,66 @@ public class Address implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
+
 		if (this == obj)
 			return true;
+
 		if (obj == null)
 			return false;
+
 		if (getClass() != obj.getClass())
 			return false;
+
 		Address other = (Address) obj;
+
 		if (city == null) {
 			if (other.city != null)
 				return false;
 		} else if (!city.equals(other.city))
 			return false;
+
 		if (country == null) {
 			if (other.country != null)
 				return false;
 		} else if (!country.equals(other.country))
 			return false;
+		
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		
 		if (postalCode == null) {
 			if (other.postalCode != null)
 				return false;
 		} else if (!postalCode.equals(other.postalCode))
 			return false;
+		
 		if (state == null) {
 			if (other.state != null)
 				return false;
 		} else if (!state.equals(other.state))
 			return false;
+		
 		if (streetAddress1 == null) {
 			if (other.streetAddress1 != null)
 				return false;
 		} else if (!streetAddress1.equals(other.streetAddress1))
 			return false;
+		
 		if (streetAddress2 == null) {
 			if (other.streetAddress2 != null)
 				return false;
 		} else if (!streetAddress2.equals(other.streetAddress2))
 			return false;
+		
 		if (streetAddress3 == null) {
 			if (other.streetAddress3 != null)
 				return false;
 		} else if (!streetAddress3.equals(other.streetAddress3))
 			return false;
+		
 		return true;
 	}
 }

@@ -3,27 +3,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
-	<artifactId>transform-messages</artifactId>
+	<artifactId>pattern-filter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>transform-messages</name>
-	<description>GE: Generating Hello World Messages with the Scheduler Component</description>
+	<name>pattern-filter</name>
+	<description>GE: Transform Java objects to XML and JSON formats</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<fuse.version>7.9.0.fuse-sb2-790065-redhat-00001</fuse.version>
+		<fuse.version>7.10.0.fuse-sb2-7_10_0-00014-redhat-00001</fuse.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
-		  <dependency>
-			<groupId>org.jboss.redhat-fuse</groupId>
-			<artifactId>fuse-springboot-bom</artifactId>
-			<version>${fuse.version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		  </dependency>
+			<dependency>
+				<groupId>org.jboss.redhat-fuse</groupId>
+				<artifactId>fuse-springboot-bom</artifactId>
+				<version>${fuse.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+		  	</dependency>
 		</dependencies>
-	  </dependencyManagement>
+	</dependencyManagement>
 	<dependencies>
 		<!-- camel dependencies -->
 		<dependency>
@@ -49,6 +49,11 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms-starter</artifactId>
 		</dependency>
+		<!-- AMQ artemis dependecy-->
+		<dependency>
+        	<groupId>javax.json</groupId>
+        	<artifactId>javax.json-api</artifactId>
+      	</dependency>
 		<!-- TODO Add jaxb dependency here -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -72,39 +77,37 @@
 	</dependencies>
 	<repositories>
 		<repository>
-		  <id>red-hat-ga-repository</id>
-		  <url>https://maven.repository.redhat.com/ga</url>
+			<id>red-hat-ga-repository</id>
+			<url>https://maven.repository.redhat.com/ga</url>
 		</repository>
-	  </repositories>
-	  <pluginRepositories>
+	</repositories>
+	<pluginRepositories>
 		<pluginRepository>
-		  <id>red-hat-ga-repository</id>
-		  <url>https://maven.repository.redhat.com/ga</url>
+			<id>red-hat-ga-repository</id>
+			<url>https://maven.repository.redhat.com/ga</url>
 		</pluginRepository>
-	  </pluginRepositories>
+	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<release>11</release>
 				</configuration>
-			  </plugin>
-			  <plugin>
+			</plugin>
+			<plugin>
 				<groupId>org.jboss.redhat-fuse</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${fuse.version}</version>
 				<executions>
-				  <execution>
-					<goals>
-					  <goal>repackage</goal>
-					</goals>
-				  </execution>
+					<execution>
+						<goals>
+					  		<goal>repackage</goal>
+						</goals>
+				  	</execution>
 				</executions>
-			  </plugin>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

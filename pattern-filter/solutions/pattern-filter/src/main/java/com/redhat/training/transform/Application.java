@@ -8,7 +8,6 @@ import com.redhat.training.model.CatalogItem;
 import com.redhat.training.model.Order;
 import com.redhat.training.model.Customer;
 
-//import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 
 import javax.jms.Connection;
@@ -120,12 +119,13 @@ public class Application {
 	}
 
 	public static OrderItem getOrderItem(int id, int qty, float price, CatalogItem item) {
-		OrderItem o = new OrderItem();
-		o.setId(new Integer(id));
-		o.setQuantity(new Integer(qty));
-		o.setExtPrice(new BigDecimal(price));
-		o.setItem(item);
-		return o;
+		OrderItem orderItem = new OrderItem();
+		orderItem.setId(new Integer(id));
+		orderItem.setQuantity(new Integer(qty));
+		orderItem.setExtPrice(new BigDecimal(price));
+		orderItem.setItem(item);
+
+		return orderItem;
 	}
 
 	public static void thread(Runnable runnable, boolean daemon) {
@@ -135,7 +135,7 @@ public class Application {
 	}
 
 	public static class OrderProducer implements Runnable {
-		Order o = new Order();
+		Order order = new Order();
 
 		OrderProducer(Integer Id, BigDecimal discount, Boolean delivered, Customer customer) {
 			CatalogItem ci1 = new CatalogItem("ci1", "catalog item 1", new BigDecimal("5"),
@@ -149,18 +149,22 @@ public class Application {
 			OrderItem oi1 = getOrderItem(1, 2, 10.0f , ci1);
 			OrderItem oi2 = getOrderItem(2, 3, 30.0f , ci2);
 
-			o.getOrderItems().add(oi1);
-			o.getOrderItems().add(oi2);
-			o.setId(Id);
-			o.setDiscount(discount);
-			o.setDelivered(delivered);
-			o.setCustomer(customer);
-			customer.getOrders().add(o);
+			order.getOrderItems().add(oi1);
+			order.getOrderItems().add(oi2);
+			order.setId(Id);
+			order.setDiscount(discount);
+			order.setDelivered(delivered);
+			order.setCustomer(customer);
+			customer.getOrders().add(order);
+		}
+
+		public Order getOrder() {
+			return order;
 		}
 
 		public void run() {
 			try {
-                // Create a ConnectionFactory
+            	// Create a ConnectionFactory
 				ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
         		cf.setBrokerURL("tcp://localhost:61616");
         		cf.setUser("admin");
@@ -176,17 +180,15 @@ public class Application {
                 // Create the destination (Topic or Queue)
                 Destination destination = session.createQueue("orderInput");
 
-				// create the object message
+				// Create the object message
 				ObjectMessage msg = session.createObjectMessage();
-/* 				CatalogItem ci1 = new CatalogItem("001", "CI 1 title", new BigDecimal("20.34"),
-					"First catalog item", "CI author", "catalogitemRoot/images/ci1image","category 1", true); */
-				msg.setObject(o);
+				msg.setObject(order);
 
                 // Create a MessageProducer from the Session to the Topic or Queue
                 MessageProducer producer = session.createProducer(destination);
                 producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-				// send the message
+				// Send the message
                 producer.send(msg);
 
                 // Clean up

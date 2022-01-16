@@ -8,7 +8,7 @@ import org.apache.camel.component.jms.JmsComponent;
 import javax.jms.JMSException;
 import org.apache.camel.model.dataformat.XmlJsonDataFormat;
 
-//TODO: Enable the route by extending the RouteBuilder superclass
+
 @Component
 public class TransformRouteBuilder extends RouteBuilder {
 
@@ -30,25 +30,20 @@ public class TransformRouteBuilder extends RouteBuilder {
             // Wire tap undelivered messages
             .wireTap("direct:jsonOrderLog")
             .to("mock:fufillmentSystem");
-
-        //TODO add direct route to mock order log end point
-        from("direct:jsonOrderLog")
-            .routeId("Log Orders")
-            .log("Order received: ${body}")
-            .to("mock:orderLog");
     }
 
     @Bean
     public JmsComponent jmsComponent() throws JMSException {
-        // Create the connectionfactory which will be used to connect to Artemis
-        ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
-        cf.setBrokerURL("tcp://localhost:61616");
-        cf.setUser("admin");
-        cf.setPassword("admin");
+        // Creates the connectionfactory which will be used to connect to Artemis
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
+        connectionFactory.setBrokerURL("tcp://localhost:61616");
+        connectionFactory.setUser("admin");
+        connectionFactory.setPassword("admin");
 
-        // Create the Camel JMS component and wire it to our Artemis connectionfactory
+        // Creates the Camel JMS component and wires it to our Artemis connectionfactory
         JmsComponent jms = new JmsComponent();
-        jms.setConnectionFactory(cf);
+        jms.setConnectionFactory(connectionFactory);
+        
         return jms;
     }
 }

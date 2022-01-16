@@ -90,41 +90,50 @@ public class Order implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+
 		if (obj == null)
 			return false;
+
 		if (getClass() != obj.getClass())
 			return false;
+
 		Order other = (Order) obj;
 		if (customer == null) {
 			if (other.customer != null)
 				return false;
 		} else if (!customer.equals(other.customer))
 			return false;
+
 		if (delivered == null) {
 			if (other.delivered != null)
 				return false;
 		} else if (!delivered.equals(other.delivered))
 			return false;
+
 		if (discount == null) {
 			if (other.discount != null)
 				return false;
 		} else if (!discount.equals(other.discount))
 			return false;
+
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+
 		if (orderItems == null) {
 			if (other.orderItems != null)
 				return false;
 		} else if (!orderItems.equals(other.orderItems))
 			return false;
+
 		if (orderDate == null) {
 			if (other.orderDate != null)
 				return false;
 		} else if (!orderDate.equals(other.orderDate))
 			return false;
+
 		return true;
 	}
 
@@ -133,7 +142,5 @@ public class Order implements Serializable {
 		return "Order [id=" + id + ", orderDate=" + orderDate + ", discount=" + discount + ", delivered=" + delivered
 				+ ", customer=" + customer + ", items=" + orderItems + "]";
 	}
-	
-	
 
 }
