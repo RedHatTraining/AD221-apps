@@ -36,6 +36,9 @@ public class TransformRouteBuilderTest {
     @Test
     public void testLogOrderRoute() throws Exception {
         // Sets an assertion
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse("2015-05-05 10:15:30 Europe/Paris", formatter);
+        Date testDate = Date.from(zonedDateTime.toInstant());
 
         String exectedJson = "{\"orderItems\":[{\"extPrice\":\"10\","
             + "\"id\":\"1\",\"item\":{\"author\":\"ci1 author\","
@@ -52,7 +55,8 @@ public class TransformRouteBuilderTest {
             + "\"email\":\"tanderson@email.com\",\"firstName\":\"Tony\","
             + "\"lastName\":\"Anderson\",\"password\":\"password\","
             + "\"username\":\"tanderson\"},\"delivered\":\"false\","
-            + "\"discount\":\"0.012\",\"id\":\"5\"}";
+            + "\"discount\":\"0.012\",\"id\":\"5\","
+            + "\"orderDate\":\"2015-05-05T03:15:30-05:00\"}";
 
         mock.expectedBodiesReceived(exectedJson);
 
@@ -72,6 +76,7 @@ public class TransformRouteBuilderTest {
         );
 
         Order testOrder = orderProducer.getOrder();
+        testOrder.setOrderDate(testDate);
 
         // Sends a message to the start component
         producerTemplate.sendBody("jms:queue:orderInput", testOrder);
