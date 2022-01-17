@@ -33,7 +33,7 @@
 
     <dependencies>
 
-    <!-- Enabling health checks -->
+        <!-- Enabling health checks -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -97,6 +97,7 @@
 			<url>https://maven.repository.redhat.com/ga</url>
 		</pluginRepository>
 	</pluginRepositories>
+
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
 
@@ -106,8 +107,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>
