@@ -18,7 +18,6 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	@XmlTransient
 	private Date orderDate = new Date();
 	private BigDecimal discount;
 	private Boolean delivered=false;
@@ -39,14 +38,15 @@ public class Order implements Serializable {
 		return id;
 	}
 
-    public void setId(Integer i) {
-        this.id = i;
-    }
+	public void setId(Integer i) {
+        	this.id = i;
+	}
 
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
-
+	
+	@XmlTransient
 	public Date getOrderDate() {
 		return orderDate;
 	}
