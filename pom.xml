@@ -16,8 +16,8 @@
 		<jboss.fuse.bom.version>7.1.0.fuse-710019-redhat-00002</jboss.fuse.bom.version>
 		<version.wildfly.camel>5.2.0.fuse-710021-redhat-00001</version.wildfly.camel>
 		<version.camel>2.21.0.fuse-710018-redhat-00001</version.camel>
-	  <maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+	  <maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
 	<dependencyManagement>
@@ -76,8 +76,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
 		</plugins>
