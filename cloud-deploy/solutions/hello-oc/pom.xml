@@ -1,89 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.redhat.training</groupId>
     <artifactId>hello-oc</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <name>Fabric8 :: Quickstarts :: Spring-Boot :: Camel</name>
-    <description>Spring Boot example running a Camel route</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <fuse.bom.version>7.10.0.fuse-sb2-7_10_0-00014-redhat-00001</fuse.bom.version>
-        <docker.image.version>1.10</docker.image.version>
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.redhat-fuse</groupId>
-                <artifactId>fuse-springboot-bom</artifactId>
-                <version>${fuse.bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <name>hello-oc</name>
+    <description>A SB Fuse app</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<fuse.version>7.9.0.fuse-sb2-790065-redhat-00001</fuse.version>
+		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+        <container.image.version>1.10</container.image.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.redhat-fuse</groupId>
+				<artifactId>fuse-springboot-bom</artifactId>
+				<version>${fuse.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
     <dependencies>
-
-        <!-- Enabling health checks -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
-        </dependency>
-
-
-        <!-- Test -->
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-model</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>openshift-client</artifactId>
-            <version>4.6.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+    		<artifactId>camel-netty-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jolokia</groupId>
+			<artifactId>jolokia-core</artifactId>
+		</dependency>
+		<!-- <dependency>
+			<groupId>io.hawt</groupId>
+			<artifactId>hawtio-springboot</artifactId>
+		  </dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring</artifactId>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 	<repositories>
 		<repository>
@@ -97,63 +74,42 @@
 			<url>https://maven.repository.redhat.com/ga</url>
 		</pluginRepository>
 	</pluginRepositories>
-
     <build>
-        <defaultGoal>spring-boot:run</defaultGoal>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <inherited>true</inherited>
-                <configuration>
-                    <rerunFailingTestsCount>3</rerunFailingTestsCount>
-                    <excludes>
-                        <exclude>**/*KT.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.jboss.redhat-fuse</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${fuse.bom.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-
-        <pluginManagement/>
-    </build>
-
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jboss.redhat-fuse</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${fuse.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
     <profiles>
         <profile>
             <id>openshift</id>
             <properties>
-                <jkube.generator.from>registry.redhat.io/fuse7/fuse-java-openshift-rhel8:${docker.image.version}</jkube.generator.from>
+                <jkube.generator.from>registry.redhat.io/fuse7/fuse-java-openshift-rhel8:${container.image.version}</jkube.generator.from>
             </properties>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.jboss.redhat-fuse</groupId>
                         <artifactId>openshift-maven-plugin</artifactId>
-                        <version>${fuse.bom.version}</version>
+                        <version>${fuse.version}</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -163,34 +119,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                        <configuration>
-                            <resources>
-                                <labels>
-                                    <pod>
-                                        <property>
-                                            <name>com.company</name>
-                                            <value>Red_Hat</value>
-                                        </property>
-                                        <property>
-                                            <name>rht.prod_name</name>
-                                            <value>Red_Hat_Integration</value>
-                                        </property>
-                                        <property>
-                                            <name>rht.prod_ver</name>
-                                            <value>7.10</value>
-                                        </property>
-                                        <property>
-                                            <name>rht.comp</name>
-                                            <value>spring-boot-camel</value>
-                                        </property>
-                                        <property>
-                                            <name>rht.comp_ver</name>
-                                            <value>${fuse.bom.version}</value>
-                                        </property>
-                                    </pod>
-                                </labels>
-                            </resources>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -198,11 +126,12 @@
         <profile>
             <id>java11</id>
             <properties>
-                <jkube.generator.from>registry.redhat.io/fuse7/fuse-java-openshift-jdk11-rhel8:${docker.image.version}</jkube.generator.from>
+                <jkube.generator.from>registry.redhat.io/fuse7/fuse-java-openshift-jdk11-rhel8:${container.image.version}</jkube.generator.from>
             </properties>
             <activation>
                 <jdk>[11,)</jdk>
             </activation>
         </profile>
     </profiles>
+
 </project>
