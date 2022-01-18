@@ -13,7 +13,7 @@ import org.apache.camel.model.dataformat.XmlJsonDataFormat;
 public class TransformRouteBuilder extends RouteBuilder {
 
     //TODO add the XmlJsonDataFormat
-
+    XmlJsonDataFormat xmlJson = new XmlJsonDataFormat();
 
     @Override
     public void configure() throws Exception {
@@ -22,6 +22,13 @@ public class TransformRouteBuilder extends RouteBuilder {
             .routeId("Transforming Orders")
             .marshal().jaxb()
             .log("XML Body: ${body}")
+            //Marshal JSON
+            .marshal(xmlJson)
+            .log("JSON Body: ${body}")
+            //Filter JSON
+            .filter().jsonpath("$[?(@.delivered !='true')]")
+            // Wire tap undelivered messages
+            .wireTap("direct:jsonOrderLog")
             .to("mock:fufillmentSystem");
     }
 
