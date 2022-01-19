@@ -164,41 +164,41 @@ public class Application {
 
 		public void run() {
 			try {
-            	// Create a ConnectionFactory
+				// Create a ConnectionFactory
 				ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
-        		cf.setBrokerURL("tcp://localhost:61616");
-        		cf.setUser("admin");
-        		cf.setPassword("admin");
+				cf.setBrokerURL("tcp://localhost:61616");
+				cf.setUser("admin");
+				cf.setPassword("admin");
 
-                // Create a Connection
-                Connection connection = cf.createConnection();
-                connection.start();
+				// Create a Connection
+				Connection connection = cf.createConnection();
+				connection.start();
 
-                // Create a Session
-                Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				// Create a Session
+				Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-                // Create the destination (Topic or Queue)
-                Destination destination = session.createQueue("orderInput");
+				// Create the destination (Topic or Queue)
+				Destination destination = session.createQueue("orderInput");
 
 				// Create the object message
 				ObjectMessage msg = session.createObjectMessage();
 				msg.setObject(order);
 
-                // Create a MessageProducer from the Session to the Topic or Queue
-                MessageProducer producer = session.createProducer(destination);
-                producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+				// Create a MessageProducer from the Session to the Topic or Queue
+				MessageProducer producer = session.createProducer(destination);
+				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 				// Send the message
-                producer.send(msg);
+				producer.send(msg);
 
-                // Clean up
-                session.close();
-                connection.close();
-            }
-            catch (Exception e) {
-                System.out.println("Caught: " + e);
-                e.printStackTrace();
-            }
+				// Clean up
+				session.close();
+				connection.close();
+			}
+			catch (Exception e) {
+				System.out.println("Caught: " + e);
+				e.printStackTrace();
+			}
 		}
 	}
 

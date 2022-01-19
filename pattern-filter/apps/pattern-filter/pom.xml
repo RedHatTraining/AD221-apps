@@ -42,8 +42,8 @@
 		</dependency>
 		<!-- JMS dependencies -->
 		<dependency>
-    		<groupId>org.apache.activemq</groupId>
-    		<artifactId>artemis-jms-client</artifactId>
+			<groupId>org.apache.activemq</groupId>
+			artifactId>artemis-jms-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -51,9 +51,9 @@
 		</dependency>
 		<!-- AMQ artemis dependecy-->
 		<dependency>
-        		<groupId>javax.json</groupId>
-        		<artifactId>javax.json-api</artifactId>
-      		</dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+		</dependency>
 		<!-- TODO Add camel-xmljson and xom dependencies here -->
 
 		<!-- TODO Add camel-jsonpath dependency here -->
