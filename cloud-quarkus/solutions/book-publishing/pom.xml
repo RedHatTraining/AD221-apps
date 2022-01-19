@@ -66,11 +66,9 @@
 
     <!-- For deployment -->
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-health</artifactId>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-microprofile-health</artifactId>
     </dependency>
-
-
 
     <!-- // TODO -->
     <dependency>
