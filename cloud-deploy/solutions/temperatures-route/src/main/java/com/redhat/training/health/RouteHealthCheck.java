@@ -1,22 +1,25 @@
-package com.redhat.training;
+package com.redhat.training.health;
 
 import java.util.Map;
 
+import org.apache.camel.Body;
+import org.apache.camel.Headers;
 import org.apache.camel.health.HealthCheckResultBuilder;
 import org.apache.camel.impl.health.AbstractHealthCheck;
 import org.springframework.stereotype.Component;
 
 // https://rmannibucau.metawerx.net/camel-healthcheck-registry-for-kubernetes.html
 
-@Component("my-health-check")
-public final class RouteHealthChecker extends AbstractHealthCheck {
+@Component("route-health-check")
+public final class RouteHealthCheck extends AbstractHealthCheck {
 
     // @Autowired
     // ApplicationContext appContext;
 
-    protected boolean up = true;
+    protected boolean up = false;
+    protected String statusMessage = "Route status unknown";
 
-    protected RouteHealthChecker() {
+    protected RouteHealthCheck() {
         super("routes", "my-health-check");
     }
 
@@ -34,11 +37,13 @@ public final class RouteHealthChecker extends AbstractHealthCheck {
 
     }
 
-    public void processError() {
+    public void down(@Headers Map headers, @Body String payload) {
         up = false;
+        statusMessage = "Route is down. " + headers.get("error");
     }
 
-    public void success() {
+    public void up() {
         up = true;
+        statusMessage = "Route is up";
     }
 }
