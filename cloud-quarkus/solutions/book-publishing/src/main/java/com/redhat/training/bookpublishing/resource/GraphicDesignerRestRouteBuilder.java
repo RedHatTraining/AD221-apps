@@ -15,7 +15,6 @@ public class GraphicDesignerRestRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         restConfiguration().bindingMode(RestBindingMode.json);
 
-        // Reading from a file endpoint and storing the values into a local variable for the REST endpoint
         from("file://data/pipeline/graphic-designer?noop=true")
             .routeId("pipeline-graphic-designer")
             .log("Processing file: ${header.CamelFileName}")
