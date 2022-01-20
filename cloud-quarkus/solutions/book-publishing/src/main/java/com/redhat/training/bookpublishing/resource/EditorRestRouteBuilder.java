@@ -15,13 +15,14 @@ public class EditorRestRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         restConfiguration().bindingMode(RestBindingMode.json);
 
-        // Reading from a file endpoint and storing the values into a local variable for the REST endpoint
+        // TODO: Add a route to store all editor books in the local variable
         from("file://data/pipeline/editor?noop=true")
             .routeId("pipeline-editor")
             .log("Processing file: ${header.CamelFileName}")
             .unmarshal().jacksonxml()
             .process().body(Object.class, (Consumer<Object>) inMemoryBooksForEditor::add);
 
+        // TODO: Add a rest route to expose the books stored in the local variable
         rest("/pipeline/editor")
             .get()
             .route()
