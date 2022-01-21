@@ -1,4 +1,6 @@
 spec:
+  strategy:
+    type: Recreate
   template:
     spec:
       containers:
@@ -26,6 +28,4 @@ spec:
           - name: SPRING_APPLICATION_JSON
             value: '{"server":{"undertow":{"io-threads":1, "worker-threads":2 }}}'
           - name: TEMPERATURE_CELSIUS_SERVICE
-            value: temperatures-celsius-service:3000
-
-
+            value: temperatures-celsius-app:3000
