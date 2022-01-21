@@ -11,8 +11,8 @@ spec:
               memory: 256Mi
           readinessProbe:
             httpGet:
-              # TODO: Change path
-              path: /actuator/health/readiness
+              # TODO: Change path to actuator readiness group
+              path: /camel/
               port: 8080
             periodSeconds: 6
             timeoutSeconds: 3

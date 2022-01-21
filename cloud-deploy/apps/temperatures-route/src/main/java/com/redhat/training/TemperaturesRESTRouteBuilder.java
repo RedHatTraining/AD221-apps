@@ -27,8 +27,8 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
                     .getIn()
                     .setHeader("error", exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class));
             })
-            // TODO: use the route-health bean to set health status to down
-            .bean("route-health", "down");
+            // TODO: use the route-health bean to set health down
+            ;
 
         rest("/")
             .get()
@@ -45,7 +45,7 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
             .unmarshal()
             .json(JsonLibrary.Jackson)
             .bean(TemperaturesConverter.class, "valuesToFahrenheit")
-            // TODO: use the route-health bean to set health status to up
-            .wireTap("bean:route-health?method=up");
+            // TODO: use the route-health bean to set health up
+            ;
     }
 }

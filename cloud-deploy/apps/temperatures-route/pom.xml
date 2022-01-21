@@ -104,39 +104,6 @@
 	</build>
     <profiles>
 		<!-- TODO: Add openshift profile with openshift-maven-plugin -->
-        <profile>
-            <id>openshift</id>
-            <properties>
-                <jkube.generator.from>registry.redhat.io/fuse7/fuse-java-openshift-rhel8:${container.image.version}</jkube.generator.from>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jboss.redhat-fuse</groupId>
-                        <artifactId>openshift-maven-plugin</artifactId>
-                        <version>${fuse.version}</version>
-						<executions>
-							<execution>
-								<goals>
-									<goal>resource</goal>
-									<goal>build</goal>
-									<goal>apply</goal>
-								</goals>
-							</execution>
-						</executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 		<!-- TODO: Java 11 profile -->
-        <profile>
-            <id>java11</id>
-            <properties>
-                <jkube.generator.from>registry.redhat.io/fuse7/fuse-java-openshift-jdk11-rhel8:${container.image.version}</jkube.generator.from>
-            </properties>
-            <activation>
-                <jdk>[11,)</jdk>
-            </activation>
-        </profile>
     </profiles>
 </project>
