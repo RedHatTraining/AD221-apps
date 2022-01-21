@@ -21,15 +21,14 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
 			.component("servlet")
 			.bindingMode(RestBindingMode.json);
 
-        
         onException(HttpHostConnectException.class)
             .process(exchange -> {
                 exchange
                     .getIn()
                     .setHeader("error", exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class));
             })
-            // TODO: use the route-health-check to process the health status
-            .bean("route-health-check", "down");
+            // TODO: use the route-health bean to set health status to down
+            .bean("route-health", "down");
 
         rest("/")
             .get()
@@ -46,7 +45,7 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
             .unmarshal()
             .json(JsonLibrary.Jackson)
             .bean(TemperaturesConverter.class, "valuesToFahrenheit")
-            // TODO: use the route-health-check to process the health status
-            .wireTap("bean:route-health-check?method=up");
+            // TODO: use the route-health bean to set health status to up
+            .wireTap("bean:route-health?method=up");
     }
 }

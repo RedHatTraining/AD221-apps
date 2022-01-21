@@ -4,9 +4,7 @@ import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.boot.availability.AvailabilityChangeEvent;
-import org.springframework.boot.availability.ReadinessState;
-import org.springframework.context.ApplicationContext;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,49 +13,36 @@ import org.springframework.stereotype.Component;
 @Component
 public class CamelRouteHealthIndicator implements HealthIndicator {
 
-    private final String messageKey = "routeStatus";
-
-    @Autowired
-    ApplicationContext appContext;
-
     @Autowired
     ProducerTemplate camelProducer;
 
     @Autowired
-    RouteHealthCheck routeHealth;
+    RouteHealth routeHealth;
 
     @Override
     public Health health() {
-        Health health;
-        ReadinessState state;
-
         testRoute();
 
-        if (routeHealth.isUp()) {
-            state = ReadinessState.ACCEPTING_TRAFFIC;
-            health = Health
-                .up()
-                .withDetail(messageKey, routeHealth.getStatusMessage())
-                .build();
-        } else {
-            state = ReadinessState.REFUSING_TRAFFIC;
-            health = Health
-                .down()
-                .withDetail(messageKey, routeHealth.getStatusMessage())
-                .build();
+        String message = routeHealth.getStatusMessage();
+
+        if ( routeHealth.isUp() ) {
+            return Health
+                    .up()
+                    .withDetail( "status", message )
+                    .build();
         }
 
-        // Set readiness state
-        AvailabilityChangeEvent.publish(appContext, state);
-
-        return health;
+        return Health
+                .down()
+                .withDetail( "status", message )
+                .build();
     }
 
     private void testRoute() {
         try {
-            camelProducer.sendBody("direct:celsiusToFahrenheit", null);
-        } catch(Exception e) {
-            System.out.println("Route failed: " + e);
+            camelProducer.sendBody( "direct:celsiusToFahrenheit", null );
+        } catch( Exception e ) {
+            System.out.println( "Route failed: " + e );
         }
     }
 

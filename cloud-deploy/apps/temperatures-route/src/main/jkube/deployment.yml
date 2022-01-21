@@ -12,16 +12,16 @@ spec:
           readinessProbe:
             httpGet:
               # TODO: Change path
-              path: /actuator/health/readinessState
+              path: /actuator/health/readiness
               port: 8080
-            periodSeconds: 2
+            periodSeconds: 6
+            timeoutSeconds: 3
             successThreshold: 1
             failureThreshold: 1
           livenessProbe:
             httpGet:
               path: /camel/
               port: 8080
-            initialDelaySeconds: 30
           env:
           - name: SPRING_APPLICATION_JSON
             value: '{"server":{"undertow":{"io-threads":1, "worker-threads":2 }}}'

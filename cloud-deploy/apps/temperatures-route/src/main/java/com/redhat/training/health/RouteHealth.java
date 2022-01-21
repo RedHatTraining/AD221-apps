@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 /**
  * Basic bean to store the route status
  */
-@Component("route-health-check")
-public final class RouteHealthCheck {
+@Component("route-health")
+public final class RouteHealth {
 
     private boolean up = true;
     private String statusMessage = "Route is up";
