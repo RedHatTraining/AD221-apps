@@ -22,7 +22,7 @@ public class EditorRestRouteBuilder extends RouteBuilder {
             .unmarshal().jacksonxml()
             .process().body(Object.class, (Consumer<Object>) inMemoryBooksForEditor::add);
 
-        // TODO: Add a rest route to expose the books stored in the local variable
+        // TODO: Add a REST route to expose the books stored in the local variable
         rest("/pipeline/editor")
             .get()
             .route()

@@ -17,7 +17,7 @@ public class EditorRestRouteBuilder extends RouteBuilder {
 
         // TODO: Add a route to store all editor books in the local variable
 
-        // TODO: Add a rest route to expose the books stored in the local variable
+        // TODO: Add a REST route to expose the books stored in the local variable
     }
 }
 
