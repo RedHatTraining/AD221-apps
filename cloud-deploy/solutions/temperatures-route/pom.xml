@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.redhat.training</groupId>
-    <artifactId>hello-oc</artifactId>
+    <artifactId>temperatures-route</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>hello-oc</name>
-    <description>A SB Fuse app</description>
+    <name>temperatures-route</name>
+    <description>Example application for Guided Exercise: Deploying Camel Applications to OpenShift</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<fuse.version>7.9.0.fuse-sb2-790065-redhat-00001</fuse.version>
+		<fuse.version>7.10.0.fuse-sb2-7_10_0-00014-redhat-00001</fuse.version>
 		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <container.image.version>1.10</container.image.version>
 	</properties>
@@ -103,6 +103,7 @@
 		</plugins>
 	</build>
     <profiles>
+		<!-- TODO: Add openshift profile with openshift-maven-plugin -->
         <profile>
             <id>openshift</id>
             <properties>
@@ -114,19 +115,20 @@
                         <groupId>org.jboss.redhat-fuse</groupId>
                         <artifactId>openshift-maven-plugin</artifactId>
                         <version>${fuse.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>resource</goal>
-                                    <goal>build</goal>
-                                    <goal>apply</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+						<executions>
+							<execution>
+								<goals>
+									<goal>resource</goal>
+									<goal>build</goal>
+									<goal>apply</goal>
+								</goals>
+							</execution>
+						</executions>
                     </plugin>
                 </plugins>
             </build>
         </profile>
+		<!-- TODO: Java 11 profile -->
         <profile>
             <id>java11</id>
             <properties>
@@ -137,5 +139,4 @@
             </activation>
         </profile>
     </profiles>
-
 </project>
