@@ -53,6 +53,7 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
             .to("direct:celsiusToFahrenheit");
 
         from("direct:celsiusToFahrenheit")
+            .routeId("celsiusToFahrenheit")
             .to("http4://{{temperature.route.celsius-service}}/temperatures?bridgeEndpoint=true&connectTimeout=5000")
             .unmarshal()
             .json(JsonLibrary.Jackson)
