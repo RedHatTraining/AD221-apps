@@ -13,7 +13,7 @@ spec:
               memory: 256Mi
           readinessProbe:
             httpGet:
-              # TODO: Change path to actuator readiness group
+              # Use actuator readiness group
               path: /actuator/health/readiness
               port: 8080
             periodSeconds: 6

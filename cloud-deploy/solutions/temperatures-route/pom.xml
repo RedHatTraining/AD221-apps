@@ -103,7 +103,7 @@
 		</plugins>
 	</build>
     <profiles>
-		<!-- TODO: Uncomment OpenShift profile + openshift-maven-plugin -->
+		<!-- OpenShift profile + openshift-maven-plugin -->
 		<profile>
 			<id>openshift</id>
 			<properties>
@@ -129,7 +129,7 @@
 			</build>
 		</profile>
 
-		<!-- TODO: Uncomment Java 11 profile -->
+		<!-- Java 11 profile -->
 		<profile>
 			<id>java11</id>
 			<properties>
