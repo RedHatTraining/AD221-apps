@@ -1,0 +1,31 @@
+spec:
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - resources:
+            requests:
+              cpu: "0.2"
+              memory: 256Mi
+            limits:
+              cpu: "1.0"
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              # Use actuator readiness group
+              path: /actuator/health/readiness
+              port: 8080
+            periodSeconds: 6
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /camel/
+              port: 8080
+          env:
+          - name: SPRING_APPLICATION_JSON
+            value: '{"server":{"undertow":{"io-threads":1, "worker-threads":2 }}}'
+          - name: TEMPERATURE_CELSIUS_SERVICE
+            value: temperatures-celsius-app:3000
