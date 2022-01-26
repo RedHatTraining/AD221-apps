@@ -32,13 +32,14 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
             .to("direct:onException");
 
         from("direct:onException")
+            .routeId("processException")
             .process(exchange -> {
                 exchange
                     .getIn()
                     .setHeader("error", exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class));
             })
             // TODO: use the route-health bean to set health down
-            .bean("route-health", "down");
+            ;
 
 
         // - REST Routes

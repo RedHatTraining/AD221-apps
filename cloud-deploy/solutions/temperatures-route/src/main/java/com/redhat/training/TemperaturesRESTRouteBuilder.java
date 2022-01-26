@@ -5,6 +5,7 @@ import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.model.rest.RestBindingMode;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.HttpHostConnectException;
 
 
@@ -17,11 +18,21 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
+        // - REST config
         restConfiguration()
 			.component("servlet")
 			.bindingMode(RestBindingMode.json);
 
+
+        // - Error handling
         onException(HttpHostConnectException.class)
+            .to("direct:onException");
+
+        onException(ConnectTimeoutException.class)
+            .to("direct:onException");
+
+        from("direct:onException")
+            .routeId("processException")
             .process(exchange -> {
                 exchange
                     .getIn()
@@ -30,6 +41,8 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
             // TODO: use the route-health bean to set health down
             .bean("route-health", "down");
 
+
+        // - REST Routes
         rest("/")
             .get()
             .route()
@@ -41,7 +54,8 @@ public class TemperaturesRESTRouteBuilder extends RouteBuilder {
             .to("direct:celsiusToFahrenheit");
 
         from("direct:celsiusToFahrenheit")
-            .to("http4://{{temperature.route.celsius-service}}/temperatures?bridgeEndpoint=true")
+            .routeId("celsiusToFahrenheit")
+            .to("http4://{{temperature.route.celsius-service}}/temperatures?bridgeEndpoint=true&connectTimeout=5000")
             .unmarshal()
             .json(JsonLibrary.Jackson)
             .bean(TemperaturesConverter.class, "valuesToFahrenheit")
