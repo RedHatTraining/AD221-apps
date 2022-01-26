@@ -1,0 +1,15 @@
+{
+  "name": "temperatures-service",
+  "version": "1.0.0",
+  "description": "Temperatures Service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Red Hat Training",
+  "private": true,
+  "dependencies": {
+    "fastify": "^3.26.0"
+  }
+}
