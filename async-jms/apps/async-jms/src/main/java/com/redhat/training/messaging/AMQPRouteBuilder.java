@@ -11,10 +11,6 @@ public class AMQPRouteBuilder extends RouteBuilder {
 	public void configure() throws Exception {
 
 		// TODO receive messages from AMQP_Queue and send  to the Log_Orders queue
-		from("amqp:queue:AMQP_Queue")
-			.routeId("Receiving Orders via AMQP")
-			.log("Passing through AMQPRouteBuilder")
-			.wireTap("mock:testAMQPRouteBuilder")
-			.to("amqp:queue:Log_Orders");
+
 	}
 }

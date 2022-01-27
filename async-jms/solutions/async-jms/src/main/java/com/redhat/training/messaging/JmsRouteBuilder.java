@@ -15,13 +15,16 @@ public class JmsRouteBuilder extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
+		// TODO: Receive from the orderInput queue, convert to json, and send to the AMQP_Queue
 		from("jms:queue:orderInput")
 			.routeId("Receiving Orders via JMS")
 			.marshal().json(JsonLibrary.Jackson)
 			.log("JSON Body from JMSRoutBuilder: ${body}")
+			.wireTap("mock:testJmsRouteBuilder")
 			.to("jms:queue:AMQP_Queue");
 	}
 
+	// TODO: Add the connectionFactory Bean
 	@Bean
 	public JmsComponent jmsComponent() throws JMSException {
 	 	// Creates the connectionfactory which will be used to connect to Artemis
