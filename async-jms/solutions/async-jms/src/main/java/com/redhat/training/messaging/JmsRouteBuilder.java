@@ -16,12 +16,12 @@ public class JmsRouteBuilder extends RouteBuilder {
 	public void configure() throws Exception {
 
 		// TODO: Receive from the orderInput queue, convert to json, and send to the AMQP_Queue
-		from("jms:queue:orderInput")
+		from("jms:queue:jms_order_input")
 			.routeId("jms-order-input")
 			.marshal().json(JsonLibrary.Jackson)
 			.log("JSON Body from JMSRoutBuilder: ${body}")
 			.wireTap("mock:testJmsRouteBuilder")
-			.to("jms:queue:AMQP_Queue");
+			.to("jms:queue:amqp_order_input");
 	}
 
 	// TODO: Add the connectionFactory Bean

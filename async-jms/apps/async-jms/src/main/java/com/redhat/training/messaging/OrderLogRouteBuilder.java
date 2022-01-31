@@ -8,8 +8,8 @@ public class OrderLogRouteBuilder extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from("jms:queue:Log_Orders")
-			.routeId("Log Orders")
+		from("jms:queue:log_orders")
+			.routeId("log-orders")
 			.log("Order received: ${body}")
 			.to("mock:fulfillmentSystem");
 	}
