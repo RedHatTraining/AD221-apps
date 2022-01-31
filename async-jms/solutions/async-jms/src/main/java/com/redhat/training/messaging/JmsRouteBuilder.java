@@ -17,7 +17,7 @@ public class JmsRouteBuilder extends RouteBuilder {
 
 		// TODO: Receive from the orderInput queue, convert to json, and send to the AMQP_Queue
 		from("jms:queue:orderInput")
-			.routeId("Receiving Orders via JMS")
+			.routeId("jms-order-input")
 			.marshal().json(JsonLibrary.Jackson)
 			.log("JSON Body from JMSRoutBuilder: ${body}")
 			.wireTap("mock:testJmsRouteBuilder")
