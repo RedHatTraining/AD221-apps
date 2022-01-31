@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
-	<artifactId>processing-orders</artifactId>
+	<artifactId>payments</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>processing-orders</name>
-	<description>GE: Processing Orders with the File Component</description>
+	<name>payments</name>
+	<description>Guided Exercise: Accessing Databases in Camel Routes</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -25,7 +25,6 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
-		<!-- TODO add FTP camel component dependency -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-ftp</artifactId>

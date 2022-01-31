@@ -1,4 +1,4 @@
-package com.redhat.training.processingorders;
+package com.redhat.training.payments;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
@@ -43,7 +43,7 @@ public class FtpToFileRouteBuilderTest {
 	public void testFTPFileContentIsWrittenToFile() throws Exception {
 		fileMock.message( 0 ).body().isEqualTo( "Hello World" );
 
-		template.sendBody( "direct:ftp", "Hello World" );
+		template.sendBody( "direct:read_payments", "Hello World" );
 
 		fileMock.assertIsSatisfied();
 	}
@@ -54,7 +54,7 @@ public class FtpToFileRouteBuilderTest {
 					@Override
 					public void configure() {
 						// Do not use the real FTP endpoint
-						replaceFromWith( "direct:ftp" );
+						replaceFromWith( "direct:read_payments" );
 
 						// Do not write to a real file
 						interceptSendToEndpoint( "file:.*customer_requests.*" )
