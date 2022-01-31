@@ -17,7 +17,10 @@ public class FtpToFileRouteBuilder extends RouteBuilder {
                 + "&maximumResults=5"
                 + "&consumer.delay=3000"
                 + "&consumeLockEntity=false")
-                .log("${body}");
+                .log("${body}")
+                // .setHeader("paymentId", )
+                .log("${headers}")
+                .to("sql:update coupons set code = '1' where id=:#${body.id}");
         // from(
         //     "ftp://localhost:21721/?" +
         //     "username=datauser&password=fuse&" +
