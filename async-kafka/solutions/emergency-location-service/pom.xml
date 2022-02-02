@@ -52,6 +52,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
+		<!-- Add camel-kafka-starter dependency here-->
 		 <dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-kafka-starter</artifactId>
