@@ -10,17 +10,12 @@ public class PaymentAnalysisRouteBuilder extends RouteBuilder {
     // TODO: Implement the configure method
     @Override
     public void configure() throws Exception {
-        from("jpa:com.redhat.training.payments.Payment?"
-                + "persistenceUnit=mysql"
-                + "&consumeDelete=false"
-                + "&maximumResults=5"
-                + "&consumer.delay=3000"
-                + "&consumeLockEntity=false")
+        // TODO: specify JPA endpoint
+        from("")
             .log("${body}")
             .process(new PaymentFraudAnalyzer())
-            .to("sql:update payment_analysis "
-                + "set fraud_score =:#${headers.fraudScore}, analysis_status = 'Completed' "
-                + "where id=:#${body.id}")
+            // TODO: specify SQL endpoint
+            .to("")
             .to("direct:payment_analysis_complete");
     }
 }
