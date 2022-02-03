@@ -20,7 +20,7 @@ public class PaymentAnalysisRouteBuilder extends RouteBuilder {
             .process(new PaymentFraudAnalyzer())
             .to("sql:update payment_analysis "
                 + "set fraud_score =:#${headers.fraudScore}, analysis_status = 'Completed' "
-                + "where id=:#${body.id}")
+                + "where payment_id=:#${body.id}")
             .to("direct:payment_analysis_complete?failIfNoConsumers=false&block=false");
     }
 }
