@@ -33,7 +33,7 @@ public class PaymentFraudAnalyzer implements Processor {
             fraudScore += 40;
         }
 
-        fraudScore = Math.min(100.0, fraudScore);
+        fraudScore = Math.min(100.0, fraudScore) / 100;
 
         exchange.getIn().setHeader("fraudScore", fraudScore);
     }

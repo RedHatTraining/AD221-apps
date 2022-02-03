@@ -18,6 +18,9 @@ public class PaymentAnalysisRouteBuilder extends RouteBuilder {
                 + "&consumeLockEntity=false")
             .log("${body}")
             .process(new PaymentFraudAnalyzer())
-            .to("sql:update payments set fraud_score =:#${headers.fraudScore} where id=:#${body.id}");
+            .to("sql:update payment_analysis "
+                + "set fraud_score =:#${headers.fraudScore}, analysis_status = 'Completed' "
+                + "where id=:#${body.id}")
+            .to("direct:payment_analysis_complete");
     }
 }

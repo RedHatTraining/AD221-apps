@@ -15,7 +15,6 @@ public class Payment {
     private Double amount;
     private String currency;
     private String email;
-    private Double fraudScore;
 
     public Long getId() {
         return id;
@@ -65,17 +64,9 @@ public class Payment {
         this.email = email;
     }
 
-    public Double getFraudScore() {
-        return fraudScore;
-    }
-
-    public void setFraudScore( Double fraudScore ) {
-        this.fraudScore = fraudScore;
-    }
-
     @Override
     public String toString() {
         return "Coupon [id=" + id + ", userId=" + userId + ", amount=" +
-                amount + ", currency=" + currency + ", fraudScore=" + fraudScore + "]";
+                amount + ", currency=" + currency + "]";
     }
 }
