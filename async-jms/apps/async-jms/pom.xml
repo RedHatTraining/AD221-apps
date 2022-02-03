@@ -57,6 +57,11 @@
 			<groupId>javax.json</groupId>
 			<artifactId>javax.json-api</artifactId>
 		</dependency>
+		<!-- camel-jsonpath dependency -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jsonpath</artifactId>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>

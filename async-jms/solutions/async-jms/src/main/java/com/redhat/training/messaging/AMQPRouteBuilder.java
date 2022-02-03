@@ -7,14 +7,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AMQPRouteBuilder extends RouteBuilder {
 
+	public static String ROUTE_NAME = "amqp-order-input";
+
 	@Override
 	public void configure() throws Exception {
 
-		// TODO receive messages from AMQP_Queue and send  to the Log_Orders queue
+		// TODO: receive messages from AMQP queue and send  to the log-orders route
 		from("amqp:queue:amqp_order_input")
-			.routeId("amqp-order-input")
-			.log("Passing through AMQPRouteBuilder")
-			.wireTap("mock:testAMQPRouteBuilder")
-			.to("amqp:queue:log_orders");
+			.routeId(ROUTE_NAME)
+			.log("AMQPRouteBuilder: Processing Non-delivered Orders")
+			.to("direct:log_orders");
 	}
 }

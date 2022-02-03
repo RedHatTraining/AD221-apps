@@ -117,8 +117,8 @@ public class Application {
 
 				// Create the destination (Topic or Queue)
 				Destination destination = session.createQueue("jms_order_input");
-                                Destination AMQPQueue = session.createQueue("amqp_order_input");
-                                Destination LogOrdersQueue = session.createTopic("log_orders");
+				Destination AMQPQueue = session.createQueue("amqp_order_input");
+				Destination LogOrdersQueue = session.createTopic("log_orders");
 
 				// Create the object message
 				ObjectMessage msg = session.createObjectMessage();
