@@ -81,7 +81,7 @@ public class EmergencyLocationRouteBuilderTest {
 
 	private void assertDBHasRecords(){
 		Integer recordCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM locations", Integer.class);
-		LOGGER.info("The `locations` table has " + recordCount + "records");
+		LOGGER.info("The locations table has " + recordCount + " records");
 		assertTrue(recordCount >= 49);
 	}
 
