@@ -14,8 +14,7 @@ public class PaymentAnalysisRouteBuilder extends RouteBuilder {
         from("")
             .log("${body}")
             .process(new PaymentFraudAnalyzer())
-            // TODO: specify SQL endpoint
-            .to("")
-            .to("direct:payment_analysis_complete");
+            // TODO: replace mock with SQL endpoint
+            .to("direct:payment_analysis_complete?failIfNoConsumers=false&block=false");
     }
 }

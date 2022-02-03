@@ -66,7 +66,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Coupon [id=" + id + ", userId=" + userId + ", amount=" +
+        return "Payment [id=" + id + ", userId=" + userId + ", amount=" +
                 amount + ", currency=" + currency + "]";
     }
 }
