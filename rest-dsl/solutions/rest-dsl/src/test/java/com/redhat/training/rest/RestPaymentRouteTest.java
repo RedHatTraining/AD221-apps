@@ -23,12 +23,19 @@ public class RestPaymentRouteTest {
 	@Test
 	@DirtiesContext
 	public void testPayments() throws Exception {
-		Thread.sleep( 3000 );
-
-		ResponseEntity<Payment[]> response = restTemplate.getForEntity( "/payments", Payment[].class );
+		ResponseEntity<Payment[]> response = restTemplate.getForEntity( "/camel/payments", Payment[].class );
 		
 		assertEquals( HttpStatus.OK, response.getStatusCode() );
 		assertEquals( 4, response.getBody().length );
 	}
 
+	@Test
+	@DirtiesContext
+	public void testPayment() throws Exception {
+		ResponseEntity<Payment[]> response = restTemplate.getForEntity( "/camel/payments/12", Payment[].class );
+		
+		assertEquals( HttpStatus.OK, response.getStatusCode() );
+		assertEquals( 1, response.getBody().length );
+		assertEquals( 8474, response.getBody()[0].getOrderId() );
+	}
 }
