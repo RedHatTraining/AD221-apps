@@ -29,7 +29,7 @@ public class PaymentRouteBuilder extends RouteBuilder {
         from("file://data/payments?noop=true")
             .transacted("PROPAGATION_REQUIRED")
             .routeId("payments-process")
-            .log("Processing file: ${header.CamelFileName}")
+            .log("File: ${header.CamelFileName}")
             .unmarshal(xmlDataFormat)
             .to("jpa:" + Payment.class.getName() + "&usePersist=true")
             .process(new NotificationProcessor())
