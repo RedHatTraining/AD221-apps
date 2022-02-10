@@ -1,0 +1,7 @@
+<payment>
+    <user_id>2</user_id>
+    <order_id>200</order_id>
+    <amount>200.00</amount>
+    <currency>EUR</currency>
+    <email></email>
+</payment>
