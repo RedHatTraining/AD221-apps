@@ -20,7 +20,13 @@ public class PaymentRouteBuilder extends RouteBuilder {
 
         // TODO: Add a dead letter queue
 
-        // TODO: Create a route to process payment files
-
+        // TODO: Set the route as transacted
+        from("file://data/payments?noop=true")
+            .routeId("payments-process")
+            .log("File: ${header.CamelFileName}")
+            .unmarshal(xmlDataFormat)
+            .to("jpa:" + Payment.class.getName() + "&usePersist=true")
+            .process(new NotificationProcessor())
+            .to("jms:queue:payment-notifications");
     }
 }

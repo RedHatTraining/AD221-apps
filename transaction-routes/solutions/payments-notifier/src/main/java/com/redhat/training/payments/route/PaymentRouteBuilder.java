@@ -25,7 +25,7 @@ public class PaymentRouteBuilder extends RouteBuilder {
             .to("jms:queue:dead-letter")
             .markRollbackOnly();
 
-        // TODO: Create a route to process payment files
+        // TODO: Set the route as transacted
         from("file://data/payments?noop=true")
             .transacted("PROPAGATION_REQUIRED")
             .routeId("payments-process")
