@@ -8,11 +8,11 @@ public class RestRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        // configure rest-dsl
+        // TODO: configure rest-dsl
         // to use servlet component and run on port 8080
 
-        // rest services under the payments context-path
+        // TODO: rest services under the payments context-path
 		
-		// routes that implement the REST services
+		// TODO: routes that implement the REST services
     }
 }
