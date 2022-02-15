@@ -17,7 +17,7 @@ public class JmsRouteBuilder extends RouteBuilder {
 		from("jms:queue:jms_order_input")
 			.routeId(ROUTE_NAME)
 			.marshal().json(JsonLibrary.Jackson)
-			.log("JSON Body from JMSRoutBuilder: ${body}")
+			.log("JSON Body from JMSRouteBuilder: ${body}")
 			.choice()
 				.when(jsonpath("$[?(@.Delivered == false)]"))
 					.to("amqp:queue:amqp_order_input")
