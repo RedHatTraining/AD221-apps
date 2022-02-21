@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Library"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="Library"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="Library"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <xsd:documentation></xsd:documentation>
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="Library">
+            <xsd:complexType name="customercf">
+                <xsd:sequence>
+                    <xsd:element name="id" type="tns:integer"></xsd:element>
+                    <xsd:element name="footprint" type="tns:integer"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="getFootprintRequest">
+        <wsdl:part name="customercf" type="xsd:customercf"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getFootprintResponse">
+        <wsdl:part name="footprint" type="tns:integer"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="Library">
+        <wsdl:operation name="getFootprint">
+            <wsdl:input message="tns:getFootprintRequest"/>
+            <wsdl:output message="tns:getFootprintResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="Library" type="tns:Library">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getFootprint">
+            <soap:operation soapAction="http://localhost:8080"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="Library"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="Library"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Library">
+        <wsdl:port binding="tns:Library" name="CarbonFootprintLibrary">
+            <soap:address location="http://localhost:8080"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
