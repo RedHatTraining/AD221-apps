@@ -5,7 +5,7 @@
 	<groupId>com.redhat.training</groupId>
 	<artifactId>emergency-localtion-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>emergency-localtion-service</name>
+	<name>emergency-location-service</name>
 	<description>GE: Emergency Location Service</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
