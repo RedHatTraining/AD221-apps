@@ -43,7 +43,7 @@
 		<!-- JMS dependencies -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
-			artifactId>artemis-jms-client</artifactId>
+			<artifactId>artemis-jms-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
