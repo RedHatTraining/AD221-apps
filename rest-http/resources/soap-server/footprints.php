@@ -2,10 +2,15 @@
 
 ini_set('soap.wsdl_cache_enabled', '0');
 
-class CustomerCarbonFootprint
+class Footprint
 {
-    public $id;
-    public $footprint;
+    public $ID;
+    public $Footprint;
+
+    function __construct(int $id, int $footprint) {
+        $this->ID        = $id;
+        $this->Footprint = $footprint;
+    }
 }
 
 function getInMemoryData() {
@@ -20,20 +25,21 @@ function getInMemoryData() {
 
 function getFootprint($customer)
 {
+    $footprint       = -1;
     $inMemoryStorage = getInMemoryData();
 
-    if (isset($inMemoryStorage[$customer->id])) {
-        return $inMemoryStorage[$customer->id]['footprint'];
+    if (isset($inMemoryStorage[$customer->ID])) {
+        $footprint = $inMemoryStorage[$customer->ID]['footprint'];
     }
 
-    return -1;
+    return new Footprint($customer->ID, $footprint);
 }
 
 // SOAP server --------------------------------------------------
 
 $soapServer = new SoapServer(
     'carbon-footprints.wsdl',
-    [ 'classmap' => [ 'customercf' => 'CustomerCarbonFootprint']]
+    [ 'classmap' => [ 'Footprint' => 'Footprint']]
 );
 
 
