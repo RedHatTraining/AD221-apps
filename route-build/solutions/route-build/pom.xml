@@ -3,17 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat.training</groupId>
-	<artifactId>hello-world</artifactId>
+	<artifactId>route-build</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hello-world</name>
-	<description>GE: Generating Hello World Messages with the Scheduler Component</description>
+	<name>route-build</name>
+	<description>GE: Creating Routes using the Java and XML DSL</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<fuse.version>7.10.0.fuse-sb2-7_10_0-00014-redhat-00001</fuse.version>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -27,7 +26,21 @@
 		</dependencies>
 	  </dependencyManagement>
 	<dependencies>
-		<!-- TODO: add camel dependencies -->
+		<!-- TODO add camel dependency -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
