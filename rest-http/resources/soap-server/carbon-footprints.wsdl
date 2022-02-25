@@ -1,71 +1,74 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:tns="FootprintService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BookService"
-                  targetNamespace="FootprintService">
-    <wsdl:documentation>Carbon Footprint</wsdl:documentation>
+<wsdl:definitions
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:tns="http://training.redhat.com/CarbonFootprintService/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        name="CarbonFootprintEndpointService"
+        targetNamespace="http://training.redhat.com/CarbonFootprintService/">
     <wsdl:types>
-        <xsd:schema targetNamespace="FootprintService">
-            <xsd:element name="Footprint">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element name="ID" type="xsd:integer" />
-                        <xsd:element name="Footprint" type="xsd:integer"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="Footprints">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element ref="tns:Footprint" minOccurs="0" maxOccurs="unbounded"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="GetFootprint">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element name="ID" type="xsd:string" />
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="GetFootprintResponse">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element ref="tns:Footprint" minOccurs="0" maxOccurs="1"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
-        </xsd:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns="http://training.redhat.com/CarbonFootprintService/"
+                   attributeFormDefault="unqualified" elementFormDefault="qualified"
+                   targetNamespace="http://training.redhat.com/CarbonFootprintService/">
+            <xs:complexType name="CarbonFootprintRequest">
+                <xs:sequence>
+                    <xs:element name="ID" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CarbonFootprintResponse">
+                <xs:sequence>
+                    <xs:element name="CarbonFootprint"
+                                type="xs:double" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:element name="CarbonFootprintRequest"
+                        nillable="true" type="CarbonFootprintRequest" />
+            <xs:element name="CarbonFootprintResponse"
+                        nillable="true" type="CarbonFootprintResponse" />
+        </xs:schema>
     </wsdl:types>
-    <wsdl:message name="GetFootprintRequest">
-        <wsdl:part element="tns:GetFootprint" name="parameters" />
+    <wsdl:message name="CarbonFootprint">
+        <wsdl:part element="tns:CarbonFootprintRequest"
+                   name="CarbonFootprintRequest">
+        </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="GetFootprintResponse">
-        <wsdl:part element="tns:GetFootprintResponse" name="parameters" />
+    <wsdl:message name="CarbonFootprintResponse">
+        <wsdl:part element="tns:CarbonFootprintResponse"
+                   name="CarbonFootprintResponse">
+        </wsdl:part>
     </wsdl:message>
-    <wsdl:portType name="FootprintService">
-        <wsdl:operation name="GetFootprint">
-            <wsdl:input message="tns:GetFootprintRequest" />
-            <wsdl:output message="tns:GetFootprintResponse" />
+    <wsdl:portType name="CarbonFootprintEndpoint">
+        <wsdl:operation name="CarbonFootprint">
+            <wsdl:input message="tns:CarbonFootprint"
+                        name="CarbonFootprint">
+            </wsdl:input>
+            <wsdl:output message="tns:CarbonFootprintResponse"
+                         name="CarbonFootprintResponse">
+            </wsdl:output>
         </wsdl:operation>
     </wsdl:portType>
-    <wsdl:binding name="FootprintServiceSOAP" type="tns:FootprintService">
+    <wsdl:binding
+            name="CarbonFootprintEndpointServiceSoapBinding"
+            type="tns:CarbonFootprintEndpoint">
         <soap:binding style="document"
                       transport="http://schemas.xmlsoap.org/soap/http" />
-        <wsdl:operation name="GetFootprint">
-            <soap:operation soapAction="FootprintService/GetFootprint" />
-            <wsdl:input>
+        <wsdl:operation name="CarbonFootprint">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="CarbonFootprint">
                 <soap:body use="literal" />
             </wsdl:input>
-            <wsdl:output>
+            <wsdl:output name="CarbonFootprintResponse">
                 <soap:body use="literal" />
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="FootprintService">
-        <wsdl:port binding="tns:FootprintServiceSOAP" name="FootprintServiceSOAP">
-            <soap:address location="http://localhost:8080" />
+    <wsdl:service name="CarbonFootprintEndpointService">
+        <wsdl:port
+                binding="tns:CarbonFootprintEndpointServiceSoapBinding"
+                name="CarbonFootprintEndpointPort">
+            <soap:address
+                    location="http://localhost:8080/" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
-

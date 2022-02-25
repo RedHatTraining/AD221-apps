@@ -2,37 +2,26 @@
 
 ini_set('soap.wsdl_cache_enabled', '0');
 
-class Footprint
-{
-    public $ID;
-    public $Footprint;
-
-    function __construct(int $id, int $footprint) {
-        $this->ID        = $id;
-        $this->Footprint = $footprint;
-    }
-}
-
 function getInMemoryData() {
     return [
-        1 => ['id' => 1, 'footprint' => 15137],
-        2 => ['id' => 2, 'footprint' => 16428],
-        3 => ['id' => 3, 'footprint' => 20429],
-        4 => ['id' => 4, 'footprint' => 19702],
-        5 => ['id' => 5, 'footprint' => 33333],
+        'customer-a' => ['measure' => 15137.11],
+        'customer-b' => ['measure' => 16428.22],
+        'customer-c' => ['measure' => 20429.33],
+        'customer-d' => ['measure' => 19702.44],
+        'customer-e' => ['measure' => 33333.55],
     ];
 }
 
-function getFootprint($customer)
+function CarbonFootprint($customer)
 {
-    $footprint       = -1;
+    $measure         = -1.0;
     $inMemoryStorage = getInMemoryData();
 
     if (isset($inMemoryStorage[$customer->ID])) {
-        $footprint = $inMemoryStorage[$customer->ID]['footprint'];
+        $measure = $inMemoryStorage[$customer->ID]['measure'];
     }
 
-    return new Footprint($customer->ID, $footprint);
+    return ['CarbonFootprint' => $measure];
 }
 
 // SOAP server --------------------------------------------------
@@ -43,5 +32,5 @@ $soapServer = new SoapServer(
 );
 
 
-$soapServer->addFunction('getFootprint');
+$soapServer->addFunction('CarbonFootprint');
 $soapServer->handle();
