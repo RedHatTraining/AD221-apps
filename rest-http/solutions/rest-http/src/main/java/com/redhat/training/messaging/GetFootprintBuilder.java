@@ -1,11 +1,11 @@
 package com.redhat.training.messaging;
 
-import footprintservice.GetFootprint;
+import com.redhat.training.carbonfootprintservice.CarbonFootprintRequest;
 
 public class GetFootprintBuilder {
 
-     public GetFootprint getFootprint(String id) {
-         GetFootprint request = new GetFootprint();
+     public CarbonFootprintRequest getFootprint(String id) {
+         CarbonFootprintRequest request = new CarbonFootprintRequest();
          request.setID(id);
 
          return request;
