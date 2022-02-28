@@ -13,5 +13,5 @@ podman run --rm -ti \
     --name ad221-ftp-server \
     --user "$(id -u):$(id -g)" \
     -p 21720:20 -p 21721:21 -p 21100-21110:21100-21110 \
-    -v $(pwd)/data:/home/datauser \
+    -v $(pwd)/data:/tmp/data:z \
     ad221-vsftpd
