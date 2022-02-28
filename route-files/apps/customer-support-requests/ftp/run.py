@@ -15,7 +15,7 @@ subprocess.Popen(
     "podman run --rm -ti"
     "  --name ad221-ftp-server"
     "  -p 21720:20 -p 21721:21 -p 21100-21110:21100-21110"
-    "  -v $(pwd)/data:/home/datauser"
+    "  -v $(pwd)/data:/tmp/data:z"
     "  ad221-vsftpd",
     cwd=cwd,
     shell=True
