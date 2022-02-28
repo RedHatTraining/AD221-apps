@@ -6,12 +6,13 @@ RUN microdnf install -y vsftpd && \
 COPY vsftpd.conf /etc/vsftpd/
 COPY start_ftp_server.sh /bin/start_ftp_server.sh
 
-RUN chmod +x /bin/start_ftp_server.sh
+RUN chmod +x /bin/start_ftp_server.sh && \
+    mkdir /tmp/data
 
 ENV USERNAME=datauser \
     PASSWORD=fuse
 
-VOLUME /home/${USERNAME}
+VOLUME /tmp/data
 
 EXPOSE 20 21
 
