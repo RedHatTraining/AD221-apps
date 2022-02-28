@@ -1,8 +1,8 @@
 #!/bin/sh
-useradd -M -d /home/${USERNAME} -u 1001 $USERNAME
+useradd -d /home/${USERNAME} -u 1001 $USERNAME
 echo "${USERNAME}:${PASSWORD}" | chpasswd
 
-chown ${USERNAME}:${USERNAME} /home/${USERNAME}
+cp /tmp/data/* /home/${USERNAME}
 chmod 777 -R /home/${USERNAME}/*
 
 echo "FTP server running..."
