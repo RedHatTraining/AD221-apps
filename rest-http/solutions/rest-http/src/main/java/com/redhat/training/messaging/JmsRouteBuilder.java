@@ -13,7 +13,6 @@ public class JmsRouteBuilder extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		// TODO: Process Orders
 		from("jms:queue:jms_order_input")
 			.routeId(ROUTE_NAME)
 			.marshal().json(JsonLibrary.Jackson)
