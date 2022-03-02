@@ -40,11 +40,11 @@
 			<artifactId>camel-test-spring</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- http4 component -->	
+		<!-- http4 component
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-http4</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- JMS dependencies -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -72,11 +72,11 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jsonpath</artifactId>
 		</dependency>
-		<!-- camel-cxf dependency -->
+		<!-- camel-cxf dependency
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-cxf</artifactId>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 	<repositories>
 		<repository>
@@ -112,7 +112,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- cxf-codegen-plugin -->
+			<!-- cxf-codegen-plugin 
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
@@ -150,7 +150,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 </project>

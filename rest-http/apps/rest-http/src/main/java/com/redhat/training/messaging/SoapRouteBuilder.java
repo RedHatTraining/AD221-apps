@@ -16,11 +16,11 @@ public class SoapRouteBuilder extends RouteBuilder {
 			.routeId(ROUTE_NAME)
 			.setBody(jsonpath("$.Name"))
 			.log("New body value: ${body}")
-			.bean(GetFootprintBuilder.class)
-			.setHeader(CxfConstants.OPERATION_NAME, constant("CarbonFootprint"))
-			.setHeader(CxfConstants.OPERATION_NAMESPACE, constant("http://training.redhat.com/CarbonFootprintService/"))
-			.to("cxf://http://localhost:8080/footprints.php"
-			+ "?serviceClass=com.redhat.training.carbonfootprintservice.CarbonFootprintEndpoint")
+			//.bean(<Request object builder class>)
+			//.setHeader(CxfConstants.OPERATION_NAME, constant(<operation name>))
+			//.setHeader(CxfConstants.OPERATION_NAMESPACE, constant(<operation namespace>))
+			//.to("cxf://<soap service URI>"
+			//+ "?serviceClass=<soap service interface>")
 			.log("From SoapRouteBuilder: ${body[0].carbonFootprint}")
 			.to("direct:log_orders");
 	}

@@ -1,8 +1,5 @@
 package com.redhat.training.messaging;
 
-import static com.redhat.training.messaging.Application.OrderProducer;
-import com.redhat.training.model.Order;
-
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.CamelContext;
@@ -17,18 +14,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.math.BigDecimal;
-import java.lang.Integer;
-
 
 @RunWith(CamelSpringBootRunner.class)
 @SpringBootTest(classes = {Application.class},
-    properties = { "camel.springboot.java-routes-include-pattern=**/JmsRoute*"})
-public class JmsRouteBuilderTest {
+    properties = { "camel.springboot.java-routes-include-pattern=**/SoapRoute*"})
+public class SoapRouteBuilderTest {
 
 
     private static final String MOCK_RESULT_LOG = "mock:result_log";
-    //private static final String MOCK_RESULT_AMQP = "mock:result_amqp";
 
     @EndpointInject(uri = MOCK_RESULT_LOG)
     private MockEndpoint resultLogEndpoint;
@@ -41,8 +34,8 @@ public class JmsRouteBuilderTest {
 
     @Before
     public void setup() throws Exception {
-	    
-	camelContext.getRouteDefinition(JmsRouteBuilder.ROUTE_NAME)
+
+	camelContext.getRouteDefinition(SoapRouteBuilder.ROUTE_NAME)
 		.autoStartup(true)
                 .adviceWith(camelContext, new AdviceWithRouteBuilder() {
                     @Override
@@ -55,33 +48,14 @@ public class JmsRouteBuilderTest {
     }
 
     @Test
-    public void testJmsOrderRoute() throws Exception {
+    public void testSaopRoute() throws Exception {
 
 	resultLogEndpoint.expectedMessageCount(1);
 
-        // Builds sample test data
-        OrderProducer orderProducer  = new OrderProducer(
-		new Integer(5),
-		new BigDecimal("0.012"),
-		false,
-		"Test Order 1",
-        "customer-a"
-        );
-
-        OrderProducer orderProducer2  = new OrderProducer(
-		new Integer(10),
-		new BigDecimal("0.015"),
-		true,
-		"Test Order 2",
-        "customer-b"
-        );
-
-        Order testOrder = orderProducer.getOrder();
-        Order testOrder2 = orderProducer2.getOrder();
+        String testOrder = "{\"ID\":5,\"Discount\":0.012,\"Delivered\":false,\"Desc\":\"Test Order 1\",\"Name\":\"customer-a\"}";
 
         // Sends messages to the start component
-        producerTemplate.sendBody("jms:queue:jms_order_input", testOrder);
-        producerTemplate.sendBody("jms:queue:jms_order_input", testOrder2);
+        producerTemplate.sendBody("direct:soap", testOrder);
 
         // Verifies that a message received
 	    resultLogEndpoint.assertIsSatisfied();
