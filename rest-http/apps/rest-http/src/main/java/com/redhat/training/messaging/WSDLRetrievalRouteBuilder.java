@@ -17,7 +17,7 @@ public class WSDLRetrievalRouteBuilder extends RouteBuilder {
 		from("direct:get-wsdl")
 			.routeId(ROUTE_NAME)
 			.setHeader(Exchange.HTTP_QUERY, constant("wsdl"))
-			//.to(<http4 component placeholder>)
+			//.to("<http4 component placeholder>")
 			.setHeader("CamelFileName", constant("Footprint.wsdl"))
 			.to("file:src/main/resources/wsdl")
 			.to("mock:test_execution_target");
