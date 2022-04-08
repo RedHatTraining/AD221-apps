@@ -25,13 +25,6 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <!-- TODO: Add the http4 dependency -->
-        <!--
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-http4</artifactId>
-        </dependency>
-        -->
         <!-- TODO: Add the camel-cxf dependency -->
         <!--
         <dependency>
