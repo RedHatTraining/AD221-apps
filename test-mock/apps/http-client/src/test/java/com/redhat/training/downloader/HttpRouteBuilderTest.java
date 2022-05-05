@@ -12,30 +12,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith( CamelSpringBootRunner.class )
 @SpringBootTest(properties = {
-	//TODO: add properties
+    // TODO: add properties
 })
 
-//TODO: add @MockEndpointsAndSkip annotation
+// TODO: add @MockEndpointsAndSkip annotation
 public class HttpRouteBuilderTest {
 
-	@Autowired
-	private ProducerTemplate template;
+    @Autowired
+    private ProducerTemplate template;
 
-	// TODO: add @EndpointInject annotation
-	MockEndpoint httpMockEndpoint;
+    // TODO: add @EndpointInject annotation
+    MockEndpoint httpMockEndpoint;
 
-	// TODO: add @EndpointInject annotation
-	MockEndpoint fileMockEndpoint;
+    // TODO: add @EndpointInject annotation
+    MockEndpoint fileMockEndpoint;
 
-	@Test
-	public void testFileRecievesContentFromHttpClient() throws InterruptedException {
-		// TODO: add httpMockEndpoint behaviour
+    @Test
+    public void testFileRecievesContentFromHttpClient() throws InterruptedException {
+        // TODO: add httpMockEndpoint behaviour
 
-		// TODO: add fileMockEndpoint expectations
+        // TODO: add fileMockEndpoint expectations
 
-		template.sendBody("direct:start", null);
+        template.sendBody("direct:start", null);
 
-		// TODO: assert fileMockEndpoint
-	}
-
+        // TODO: assert fileMockEndpoint
+    }
 }

@@ -12,35 +12,41 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith( CamelSpringBootRunner.class )
 @SpringBootTest(properties = {
-	"http_route.start=direct:start",
+    // TODO: add properties
+    "http_route.start=direct:start",
     "http_route.server=http4://test-fake"
 })
 
-//TODO: add @MockEndpointsAndSkip annotation
+// TODO: add @MockEndpointsAndSkip annotation
 @MockEndpointsAndSkip("http.*|file:out.*")
 public class HttpRouteBuilderTest {
 
-	@Autowired
-	private ProducerTemplate template;
+    @Autowired
+    private ProducerTemplate template;
 
-	@EndpointInject(uri = "mock:http4:test-fake/greeting")
-	MockEndpoint httpMockEndpoint;
+    // TODO: add @EndpointInject annotation
+    @EndpointInject(uri = "mock:http4:test-fake/greeting")
+    MockEndpoint httpMockEndpoint;
 
-	@EndpointInject(uri = "mock:file:out")
-	MockEndpoint fileMockEndpoint;
+    // TODO: add @EndpointInject annotation
+    @EndpointInject(uri = "mock:file:out")
+    MockEndpoint fileMockEndpoint;
 
-	@Test
-	public void testFileRecievesContentFromHttpClient() throws InterruptedException {
-		httpMockEndpoint.whenAnyExchangeReceived(e -> {
-			e.getOut().setBody("Hello test!");
-		});
+    @Test
+    public void testFileRecievesContentFromHttpClient() throws InterruptedException {
+        // TODO: add httpMockEndpoint behaviour
+        httpMockEndpoint.whenAnyExchangeReceived(e -> {
+            e.getOut().setBody("Hello test!");
+        });
 
-		fileMockEndpoint.expectedMessageCount(1);
-		fileMockEndpoint.expectedBodiesReceived("Hello test!");
+        // TODO: add fileMockEndpoint expectations
+        fileMockEndpoint.expectedMessageCount(1);
+        fileMockEndpoint.expectedBodiesReceived("Hello test!");
 
-		template.sendBody("direct:start", null);
+        template.sendBody("direct:start", null);
 
-		fileMockEndpoint.assertIsSatisfied();
-	}
+        // TODO: assert fileMockEndpoint
+        fileMockEndpoint.assertIsSatisfied();
+    }
 
 }
