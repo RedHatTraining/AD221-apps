@@ -8,6 +8,7 @@ public class HttpRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        // TODO: use property placeholders
         from("{{http_route.start}}")
             .to("{{http_route.server}}/greeting")
             .to("file:out?fileName=response.txt");
