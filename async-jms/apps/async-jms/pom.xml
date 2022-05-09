@@ -40,9 +40,21 @@
 			<artifactId>camel-test-spring</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- JMS dependencies -->
+		<!-- TODO: Uncomment JMS dependencies -->
+		<!-- <dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>artemis-jms-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms-starter</artifactId>
+		</dependency> -->
 
-		<!-- AMQP dependency -->
+		<!-- TODO: Uncomment AMQP dependency -->
+		<!-- <dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-amqp</artifactId>
+		</dependency> -->
 
 		<!-- camel-jackson dependencies -->
 		<dependency>
