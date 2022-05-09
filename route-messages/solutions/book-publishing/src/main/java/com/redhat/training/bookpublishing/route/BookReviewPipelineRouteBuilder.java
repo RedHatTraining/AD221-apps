@@ -14,7 +14,10 @@ public class BookReviewPipelineRouteBuilder extends RouteBuilder {
         from("file://data/manuscripts?noop=true")
             .routeId("book-review-pipeline")
             .setHeader(ROUTING_HEADER).method(RoutingSlipStrategy.class)
-            .log(String.format("File: ${header.CamelFileName} - Destination: ${header.%s}", ROUTING_HEADER))
+            .log(String.format(
+                "File: ${header.CamelFileName} - Destination: ${header.%s}",
+                ROUTING_HEADER
+            ))
         .routingSlip(header(ROUTING_HEADER));
     }
 }
