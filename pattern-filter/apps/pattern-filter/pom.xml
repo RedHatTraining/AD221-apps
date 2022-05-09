@@ -26,6 +26,7 @@
     </dependencyManagement>
     <dependencies>
         <!-- TODO Add camel-xmljson and xom dependencies here -->
+        <!--
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-xmljson</artifactId>
@@ -35,16 +36,21 @@
             <artifactId>xom</artifactId>
             <version>1.3.7</version>
         </dependency>
+        -->
         <!-- TODO Add camel-jsonpath dependency here -->
+        <!--
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jsonpath</artifactId>
         </dependency>
+        -->
         <!-- TODO Add jaxb dependency here -->
+        <!--
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jaxb</artifactId>
         </dependency>
+        -->
         <!-- camel dependencies -->
         <dependency>
             <groupId>org.apache.camel</groupId>
