@@ -29,7 +29,17 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
-		 <!-- TODO Add camel test dependencies here -->
+		<!-- TODO: Add camel test dependencies by uncommenting the following code -->
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring</artifactId>
+			<scope>test</scope>
+		</dependency> -->
 	</dependencies>
 	<repositories>
 		<repository>
