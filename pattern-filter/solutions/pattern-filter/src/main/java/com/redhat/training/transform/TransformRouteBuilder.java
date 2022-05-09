@@ -12,38 +12,38 @@ import org.apache.camel.model.dataformat.XmlJsonDataFormat;
 @Component
 public class TransformRouteBuilder extends RouteBuilder {
 
-	//TODO add the XmlJsonDataFormat
-	XmlJsonDataFormat xmlJson = new XmlJsonDataFormat();
+    // TODO: add the XmlJsonDataFormat
+    XmlJsonDataFormat xmlJson = new XmlJsonDataFormat();
 
-	@Override
-	public void configure() throws Exception {
+    @Override
+    public void configure() throws Exception {
 
-		from("jms:queue:orderInput")
-			.routeId("Transforming Orders")
-			.marshal().jaxb()
-			.log("XML Body: ${body}")
-			//Marshal JSON
-			.marshal(xmlJson)
-			.log("JSON Body: ${body}")
-			//Filter JSON
-			.filter().jsonpath("$[?(@.delivered !='true')]")
-			// Wire tap undelivered messages
-			.wireTap("direct:jsonOrderLog")
-			.to("mock:fufillmentSystem");
-	}
+        from("jms:queue:orderInput")
+            .routeId("Transforming Orders")
+            .marshal().jaxb()
+            .log("XML Body: ${body}")
+            // Marshal JSON
+            .marshal(xmlJson)
+            .log("JSON Body: ${body}")
+            // Filter JSON
+            .filter().jsonpath("$[?(@.delivered !='true')]")
+            // Wire tap undelivered messages
+            .wireTap("direct:jsonOrderLog")
+        .to("mock:fufillmentSystem");
+    }
 
-	@Bean
-	public JmsComponent jmsComponent() throws JMSException {
-		// Creates the connectionfactory which will be used to connect to Artemis
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-		connectionFactory.setBrokerURL("tcp://localhost:61616");
-		connectionFactory.setUser("admin");
-		connectionFactory.setPassword("admin");
+    @Bean
+    public JmsComponent jmsComponent() throws JMSException {
+        // Creates the connectionfactory which will be used to connect to Artemis
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
+        connectionFactory.setBrokerURL("tcp://localhost:61616");
+        connectionFactory.setUser("admin");
+        connectionFactory.setPassword("admin");
 
-		// Creates the Camel JMS component and wires it to our Artemis connectionfactory
-		JmsComponent jms = new JmsComponent();
-		jms.setConnectionFactory(connectionFactory);
+        // Creates the Camel JMS component and wires it to our Artemis connectionfactory
+        JmsComponent jms = new JmsComponent();
+        jms.setConnectionFactory(connectionFactory);
 
-		return jms;
-	}
+        return jms;
+    }
 }

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderLogRouteBuilder extends RouteBuilder {
 
-	@Override
-	public void configure() throws Exception {
+    @Override
+    public void configure() throws Exception {
 
-		// TODO add direct route to mock order log end point
+        // TODO: add direct route to mock order log end point
 
-	}
+    }
 
 }
