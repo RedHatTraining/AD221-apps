@@ -1,7 +1,5 @@
 package com.redhat.training.health.route;
 
-import java.net.URI;
-
 import javax.enterprise.context.ApplicationScoped;
 
 import com.redhat.training.health.route.aggregation.CovidCountryJsonDataAggregationStrategy;
@@ -9,7 +7,6 @@ import com.redhat.training.health.route.aggregation.CovidCountryJsonDataAggregat
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
-import org.apache.http.client.utils.URIBuilder;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
@@ -29,18 +26,10 @@ class RESTRouteBuilder extends RouteBuilder{
         restConfiguration()
             .bindingMode(RestBindingMode.json);
 
-            URI dataUrl = new URIBuilder()
-            .setScheme("mongodb")
-            .setHost("camelMongoClient")
-            .addParameter("database", "covid-db")
-            .addParameter("collection", "covid-data")
-            .addParameter("operation", "findAll")
-            .build();
-
         rest("/covid-data")
             .get()
             .route()
-            .to(dataUrl.toString())
+            .to("mongodb:camelMongoClient?database=covid-db&collection=covid-data&operation=findAll")
             .endRest();
 
         rest("/covid-data-enriched")
