@@ -5,7 +5,7 @@
   <artifactId>pattern-combine</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>pattern-combine</name>
-  <description>GE: Processing Orders with the File Component</description>
+  <description>GE: Splitting and Aggregating Messages</description>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
