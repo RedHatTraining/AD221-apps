@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<fuse.version>7.10.0.fuse-sb2-7_10_0-00014-redhat-00001</fuse.version>
+		<fuse.version>7.11.0.fuse-sb2-7_11_0-00028-redhat-00001</fuse.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
