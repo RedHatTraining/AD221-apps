@@ -14,7 +14,7 @@
 # docker run -i --rm -p 8080:8080 quarkus/health-backend
 #
 ###
-FROM quay.io/quarkus/quarkus-distroless-image:1.0
+FROM registry.ocp4.example.com:8443/quarkus/quarkus-distroless-image:1.0
 COPY target/*-runner /application
 
 EXPOSE 8080

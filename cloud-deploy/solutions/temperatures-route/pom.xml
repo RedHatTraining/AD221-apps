@@ -107,7 +107,7 @@
 		<profile>
 			<id>openshift</id>
 			<properties>
-				<jkube.generator.from>registry.redhat.io/fuse7/fuse-java-openshift-jdk11-rhel8:${container.image.version}</jkube.generator.from>
+				<jkube.generator.from>registry.ocp4.example.com:8443/fuse7/fuse-java-openshift-jdk11-rhel8:${container.image.version}</jkube.generator.from>
 			</properties>
 			<build>
 				<plugins>

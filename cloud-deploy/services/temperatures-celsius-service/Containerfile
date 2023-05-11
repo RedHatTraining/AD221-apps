@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-16-minimal:1-10
+FROM registry.ocp4.example.com:8443/ubi8/nodejs-16-minimal:1-10
 
 # Install dependencies
 COPY package.json package-lock.json /opt/app-root/src/

@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/php-74
+FROM registry.ocp4.example.com:8443/ubi8/php-74
 
 ADD carbon-footprints.wsdl .
 ADD footprints.php .
