@@ -22,9 +22,10 @@ public class ManuscriptsApi extends RouteBuilder {
 
         rest("/manuscripts")
             .get()
-                .route()
-                .routeId("rest-manuscripts")
-                .setBody(exchange -> inMemoryBooks)
-            .endRest();
+            .to("direct:return-manuscripts");
+
+        from("direct:return-manuscripts")
+            .routeId("rest-manuscripts")
+            .setBody(exchange -> inMemoryBooks);
     }
 }

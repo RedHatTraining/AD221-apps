@@ -26,14 +26,15 @@ public class ManuscriptsApi extends RouteBuilder {
         from("file:/etc/camel/resources?noop=true")
             .routeId("manuscripts")
             .log("Processing file: ${header.CamelFileName}")
-            .unmarshal().jacksonxml()
+            .unmarshal().jacksonXml()
             .process().body(Object.class, (Consumer<Object>) inMemoryBooks::add);
 
         rest("/manuscripts")
             .get()
-                .route()
-                .routeId("rest-manuscripts")
-                .setBody(exchange -> inMemoryBooks)
-            .endRest();
+            .to("direct:return-manuscripts");
+
+        from("direct:return-manuscripts")
+            .routeId("rest-manuscripts")
+            .setBody(exchange -> inMemoryBooks);
     }
 }
